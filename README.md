@@ -1,6 +1,6 @@
 # project: The Gym
 
-## Author
+## Authors
 
 * Karolina Jasińska
 * Sebastian Jankowski
