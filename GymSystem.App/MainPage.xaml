@@ -1,0 +1,59 @@
+﻿<Page
+    x:Class="GymSystem.App.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Style="{StaticResource GidStyle}">
+
+        <NavigationView x:Name="navView"
+                         ItemInvoked="NavigationView_ItemInvoked"
+                         BackRequested="NavView_BackRequested" IsBackEnabled="{x:Bind AppFrame.CanGoBack, Mode=OneWay}"
+                        Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <NavigationView.MenuItems>
+                <!--<NavigationViewItemHeader Content="Konta"/>
+                <NavigationViewItem Icon="AddFriend" Content="{x:Bind DodajKlienta}" Tag="new"  />
+                <NavigationViewItem Icon="Edit" Content="Edytuj dane" Tag="edit" />
+                <NavigationViewItem Icon="Find" Content="Wyświetl uprawnienia klienta" Tag="edit" />-->
+                <NavigationViewItem  x:Name="CustomerListMenuItem" Icon="ContactInfo" Content="{x:Bind ListaKlientow}" Tag="list" />
+                <!--<NavigationViewItem Icon="Delete" Content="Usuń konto" Tag="edit" />
+                <NavigationViewItemSeparator/>
+                <NavigationViewItemHeader Content="Karnety"/>
+                <NavigationViewItem Icon="Add" Content="{x:Bind NowyKarnet}" Tag="carnet" />
+                <NavigationViewItem Icon="Edit" Content="Edytuj karnet" Tag="carnet" />-->
+                <NavigationViewItem  x:Name="EntranceListMenuItem" Icon="List" Content="{x:Bind ListaKarnetow}" Tag="SamplePage4" />
+            </NavigationView.MenuItems>
+
+
+
+            <Frame
+                x:Name="frame"
+                Margin="10,-52,0,0"
+                Navigating="OnNavigatingToPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition>
+                            <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                <EntranceNavigationTransitionInfo />
+                            </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                        </NavigationThemeTransition>
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
+        </NavigationView>
+
+
+    </Grid>
+    <!--<Page.TopAppBar>
+        <CommandBar>
+            <AppBarButton x:Name="previousCustomer" Icon="Previous" Label="Previous" Command="{Binding Path=PreviousCustomer}"/>
+            <AppBarButton x:Name="nextCustomer" Icon="Up" Label="Next" Command="{Binding Path=NextCustomer}"/>
+            <AppBarButton x:Name="saveChanged" Icon="Save" Label="Save changes"/>
+            <AppBarButton x:Name="admin" Icon="Admin" Label="Admin"/>
+        </CommandBar>
+    </Page.TopAppBar>-->
+
+
+</Page>
