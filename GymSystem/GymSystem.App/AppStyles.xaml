@@ -1,0 +1,9 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GymSystem.App">
+    <ImageBrush x:Key="bgBrush" ImageSource="Images/tlo.png"/>
+    <Style x:Key="GidStyle" TargetType="Grid">
+        <Setter Property="Background" Value="{StaticResource bgBrush}"/>
+    </Style>
+</ResourceDictionary>
