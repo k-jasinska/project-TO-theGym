@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Navigation;
 namespace GymSystem.App
 {
     /// <summary>
-    /// Zapewnia zachowanie specyficzne dla aplikacji, aby uzupełnić domyślną klasę aplikacji.
+    /// Zapewnia zachowanie specyficzne dla aplikacsdffji, aby uzupełnić domyślną klasę aplikacji.
     /// </summary>
     sealed partial class App : Application
     {

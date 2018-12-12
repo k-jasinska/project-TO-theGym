@@ -3,3 +3,7 @@
 ################################################################################
 
 /.vs
+/GymSystem.App/obj
+/GymSystem/GymSystem.App/obj
+/GymSystem/GymSystem/obj
+/GymSystem/obj
