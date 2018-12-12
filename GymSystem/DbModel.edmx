@@ -4,11 +4,127 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="DbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="DbModelTargetContainer" >
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="DbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DbModelStoreContainer">
+    <EntitySet Name="PersonSet" EntityType="DbModel.Store.PersonSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EntranceSet" EntityType="DbModel.Store.EntranceSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EntranceTypeSet" EntityType="DbModel.Store.EntranceTypeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EntranceLogSet" EntityType="DbModel.Store.EntranceLogSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AddressSet" EntityType="DbModel.Store.AddressSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="EntrancePerson" Association="DbModel.Store.EntrancePerson">
+      <End Role="Entrance" EntitySet="EntranceSet" />
+      <End Role="Person" EntitySet="PersonSet" />
+    </AssociationSet>
+    <AssociationSet Name="EntranceTypeEntrance" Association="DbModel.Store.EntranceTypeEntrance">
+      <End Role="EntranceType" EntitySet="EntranceTypeSet" />
+      <End Role="Entrance" EntitySet="EntranceSet" />
+    </AssociationSet>
+    <AssociationSet Name="EntranceLogEntrance" Association="DbModel.Store.EntranceLogEntrance">
+      <End Role="EntranceLog" EntitySet="EntranceLogSet" />
+      <End Role="Entrance" EntitySet="EntranceSet" />
+    </AssociationSet>
+    <AssociationSet Name="AdressPerson" Association="DbModel.Store.AdressPerson">
+      <End Role="Adress" EntitySet="AddressSet" />
+      <End Role="Person" EntitySet="PersonSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="PersonSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Pesel" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Mail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Adress_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="EntranceSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BeginDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="Person_Id" Type="int" Nullable="false" />
+    <Property Name="EntranceType_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EntranceTypeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EntranceLogSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Entrance_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AddressSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="street" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="city" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="EntrancePerson">
+    <End Role="Entrance" Type="DbModel.Store.EntranceSet" Multiplicity="*" />
+    <End Role="Person" Type="DbModel.Store.PersonSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Entrance">
+        <PropertyRef Name="Person_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EntranceTypeEntrance">
+    <End Role="EntranceType" Type="DbModel.Store.EntranceTypeSet" Multiplicity="1" />
+    <End Role="Entrance" Type="DbModel.Store.EntranceSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntranceType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Entrance">
+        <PropertyRef Name="EntranceType_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EntranceLogEntrance">
+    <End Role="EntranceLog" Type="DbModel.Store.EntranceLogSet" Multiplicity="*" />
+    <End Role="Entrance" Type="DbModel.Store.EntranceSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Entrance">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EntranceLog">
+        <PropertyRef Name="Entrance_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AdressPerson">
+    <End Role="Adress" Type="DbModel.Store.AddressSet" Multiplicity="0..1" />
+    <End Role="Person" Type="DbModel.Store.PersonSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Adress">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="Adress_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -29,6 +145,11 @@
             <End Role="EntranceLog" EntitySet="EntranceLogSet" />
             <End Role="Entrance" EntitySet="EntranceSet" />
           </AssociationSet>
+          <EntitySet Name="AddressSet" EntityType="DbModel.Address" />
+          <AssociationSet Name="AdressPerson" Association="DbModel.AdressPerson">
+            <End Role="Adress" EntitySet="AddressSet" />
+            <End Role="Person" EntitySet="PersonSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Person">
           <Key>
@@ -41,7 +162,7 @@
           <Property Name="Phone" Type="String" Nullable="false" />
           <Property Name="Mail" Type="String" Nullable="false" />
           <NavigationProperty Name="Entrance" Relationship="DbModel.EntrancePerson" FromRole="Person" ToRole="Entrance" />
-          <Property Name="Password" Type="String" Nullable="false" />
+          <NavigationProperty Name="Adress" Relationship="DbModel.AdressPerson" FromRole="Person" ToRole="Adress" />
         </EntityType>
         <EntityType Name="Entrance">
           <Key>
@@ -50,8 +171,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Person" Relationship="DbModel.EntrancePerson" FromRole="Entrance" ToRole="Person" />
           <NavigationProperty Name="EntranceType" Relationship="DbModel.EntranceTypeEntrance" FromRole="Entrance" ToRole="EntranceType" />
-          <Property Name="BeginDate" Type="String" Nullable="false" />
-          <Property Name="EndDate" Type="String" Nullable="false" />
+          <Property Name="BeginDate" Type="DateTime" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="EntranceLog" Relationship="DbModel.EntranceLogEntrance" FromRole="Entrance" ToRole="EntranceLog" />
         </EntityType>
         <Association Name="EntrancePerson">
@@ -64,9 +185,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Entrance" Relationship="DbModel.EntranceTypeEntrance" FromRole="EntranceType" ToRole="Entrance" />
-          <Property Name="Price" Type="String" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Duration" Type="String" Nullable="false" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="EntranceTypeEntrance">
           <End Type="DbModel.EntranceType" Role="EntranceType" Multiplicity="1" />
@@ -84,17 +205,110 @@
           <End Type="DbModel.EntranceLog" Role="EntranceLog" Multiplicity="*" />
           <End Type="DbModel.Entrance" Role="Entrance" Multiplicity="1" />
         </Association>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="street" Type="String" Nullable="false" />
+          <Property Name="code" Type="String" Nullable="false" />
+          <Property Name="city" Type="String" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="DbModel.AdressPerson" FromRole="Adress" ToRole="Person" />
+        </EntityType>
+        <Association Name="AdressPerson">
+          <End Type="DbModel.Address" Role="Adress" Multiplicity="0..1" />
+          <End Type="DbModel.Person" Role="Person" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="DbModel" />
-        <Alias Key="Target" Value="DbModel.Store" />
-        <EntityContainerMapping CdmEntityContainer="DbModelContainer" StorageEntityContainer="DbModelTargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DbModelStoreContainer" CdmEntityContainer="DbModelContainer">
+    <EntitySetMapping Name="PersonSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DbModel.Person)">
+        <MappingFragment StoreEntitySet="PersonSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Pesel" ColumnName="Pesel" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntranceSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DbModel.Entrance)">
+        <MappingFragment StoreEntitySet="EntranceSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntranceTypeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DbModel.EntranceType)">
+        <MappingFragment StoreEntitySet="EntranceTypeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntranceLogSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DbModel.EntranceLog)">
+        <MappingFragment StoreEntitySet="EntranceLogSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AddressSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DbModel.Address)">
+        <MappingFragment StoreEntitySet="AddressSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="street" ColumnName="street" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="city" ColumnName="city" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="EntrancePerson" TypeName="DbModel.EntrancePerson" StoreEntitySet="EntranceSet">
+      <EndProperty Name="Person">
+        <ScalarProperty Name="Id" ColumnName="Person_Id" />
+      </EndProperty>
+      <EndProperty Name="Entrance">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EntranceTypeEntrance" TypeName="DbModel.EntranceTypeEntrance" StoreEntitySet="EntranceSet">
+      <EndProperty Name="EntranceType">
+        <ScalarProperty Name="Id" ColumnName="EntranceType_Id" />
+      </EndProperty>
+      <EndProperty Name="Entrance">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EntranceLogEntrance" TypeName="DbModel.EntranceLogEntrance" StoreEntitySet="EntranceLogSet">
+      <EndProperty Name="Entrance">
+        <ScalarProperty Name="Id" ColumnName="Entrance_Id" />
+      </EndProperty>
+      <EndProperty Name="EntranceLog">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AdressPerson" TypeName="DbModel.AdressPerson" StoreEntitySet="PersonSet">
+      <EndProperty Name="Adress">
+        <ScalarProperty Name="Id" ColumnName="Adress_Id" />
+      </EndProperty>
+      <EndProperty Name="Person">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Adress_Id" IsNull="false" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -108,6 +322,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->

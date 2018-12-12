@@ -1,4 +1,8 @@
-﻿using System;
+﻿using GymSystem.App.Models;
+using GymSystem.App.ViewModels;
+using GymSystem.Db;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,7 +23,7 @@ using Windows.UI.Xaml.Navigation;
 namespace GymSystem.App
 {
     /// <summary>
-    /// Zapewnia zachowanie specyficzne dla aplikacsdffji, aby uzupełnić domyślną klasę aplikacji.
+    /// Zapewnia zachowanie specyficzne dla aplikacji, aby uzupełnić domyślną klasę aplikacji.
     /// </summary>
     sealed partial class App : Application
     {
@@ -31,7 +35,15 @@ namespace GymSystem.App
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            using (var db = new Model())
+            {
+                db.Database.Migrate();
+            }
+        
         }
+
+        public static IAdmin Repository { get; private set; }
+        public static MainViewModel ViewModel { get; } = new MainViewModel();
 
         /// <summary>
         /// Wywoływane, gdy aplikacja jest uruchamiana normalnie przez użytkownika końcowego. Inne punkty wejścia
@@ -45,12 +57,14 @@ namespace GymSystem.App
 
             if (shell.AppFrame.Content == null)
             {
-                // When the navigation stack isn't restored, navigate to the first page
-                // suppressing the initial entrance animation.
+
                 shell.AppFrame.Navigate(typeof(ClientList), null,
                     new SuppressNavigationTransitionInfo());
             }
             Window.Current.Activate();
+
+
+            Repository = new Admin();
           
         }
 
