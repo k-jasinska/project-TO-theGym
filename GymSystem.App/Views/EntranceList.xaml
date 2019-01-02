@@ -80,7 +80,7 @@
             <uc:CollapsibleSearchBox
                 x:Name="CustomerSearchBox"
                 Width="240"
-                Margin="6,26,30,18"
+                Margin="6,26,20,18"
 
                 Loaded="CustomerSearchBox_Loaded"
                 RelativePanel.AlignRightWithPanel="True" />

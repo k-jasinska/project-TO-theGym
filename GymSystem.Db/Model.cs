@@ -29,16 +29,16 @@ namespace GymSystem.Db
         public System.DateTime EndDate { get; set; }
 
         public virtual Person Person { get; set; }
-        public virtual EntranceType EntranceType { get; set; }
+        public virtual EntranceType EntranceType { get; set; } //Price, duration depends on type
         public virtual ICollection<EntranceLog> EntranceLog { get; set; }
     }
     public partial class Address
     {
 
         public int Id { get; set; }
-        public string street { get; set; }
-        public string code { get; set; }
-        public string city { get; set; }
+        public string Street { get; set; }
+        public string Code { get; set; }
+        public string City { get; set; }
 
         public virtual ICollection<Person> Person { get; set; }
     }

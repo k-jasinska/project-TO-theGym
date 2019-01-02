@@ -83,7 +83,7 @@
                                 Grid.Row="1"
                                 MinWidth="140"
                                 Margin="0,8,16,0"
-                                Header="email"
+                                Header="e-mail"
                                 RelativePanel.AlignLeftWithPanel="True"
                                 RelativePanel.Below="name"
                                 Text="{x:Bind ViewModel.Email, Mode=TwoWay}" />

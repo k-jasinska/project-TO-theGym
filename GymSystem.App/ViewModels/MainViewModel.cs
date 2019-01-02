@@ -72,9 +72,10 @@ namespace GymSystem.App.ViewModels
                 });
             }
 
-        internal  async Task DeletePerson(CustomerViewModel deleteOrder)
+        internal async Task DeletePerson(CustomerViewModel deleteOrder)
         {
-            await  App.Repository.DeleteCustomer(deleteOrder.Model);
+            await App.Repository.DeleteCustomer(deleteOrder.Model);
+            Sync();
         }
 
         /// <summary>

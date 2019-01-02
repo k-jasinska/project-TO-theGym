@@ -41,7 +41,7 @@ namespace GymSystem.App
 
         public Action<object, EventArgs> AddNewCustomerCanceled { get; internal set; }
 
-        public CustomerViewModel(Person c = null)
+        public CustomerViewModel(Person c = null) //constructor
         {
             if (c == null)
                 c = new Person(); 
@@ -103,12 +103,12 @@ namespace GymSystem.App
         }
         public string City
         {
-            get => Model.Adress.city;
+            get => Model.Adress.City;
             set
             {
-                if (value != Model.Adress.city)
+                if (value != Model.Adress.City)
                 {
-                    Model.Adress.city = value;
+                    Model.Adress.City = value;
                     IsModified = true;
                     OnPropertyChanged();
                 }
@@ -117,12 +117,12 @@ namespace GymSystem.App
 
         public string Code
         {
-            get => Model.Adress.code;
+            get => Model.Adress.Code;
             set
             {
-                if (value != Model.Adress.code)
+                if (value != Model.Adress.Code)
                 {
-                    Model.Adress.code = value;
+                    Model.Adress.Code = value;
                     IsModified = true;
                     OnPropertyChanged();
                 }
@@ -130,12 +130,12 @@ namespace GymSystem.App
         }
         public string Street
         {
-            get => Model.Adress.street;
+            get => Model.Adress.Street;
             set
             {
-                if (value != Model.Adress.street)
+                if (value != Model.Adress.Street)
                 {
-                    Model.Adress.street = value;
+                    Model.Adress.Street = value;
                     IsModified = true;
                     OnPropertyChanged();
                 }
@@ -151,8 +151,10 @@ namespace GymSystem.App
                 IsNewCustomer = false;
                 await App.Repository.AddCustomer(Model);
             }
-            await App.Repository.ModifyCustomer(Model);
-
+            else
+            {
+                await App.Repository.ModifyCustomer(Model);
+            }
         }
         public void StartEdit() => IsInEdit = true;
         public async void EndEdit() => await SaveAsync();
@@ -188,7 +190,6 @@ namespace GymSystem.App
         }
         public async Task RefreshCustomerAsync()
         {
- 
             Model = await App.Repository.GetCustomer(Model.Id);
         }
     }

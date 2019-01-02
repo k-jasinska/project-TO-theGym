@@ -18,7 +18,7 @@ namespace GymSystem.App.Models
         Task AddEnteranceLog(Entrance p, DateTime date);
         Task<DateTime> GetEnteranceLog(Entrance p);
         Task IsValidEnterance(int enteranceid);
-        Task GetEnterance(int enteranceid);
+        Entrance GetEntrance(int entranceid);
         Task<Entrance> GetEnterances();
         Task<List<Person>> GetCustomers();
         Task<Person> GetCustomer(int id);

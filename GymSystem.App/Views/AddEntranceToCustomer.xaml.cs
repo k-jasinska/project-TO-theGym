@@ -33,6 +33,6 @@ namespace GymSystem.App
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Disabled;
         }
-       
+        public void AddEntranceCanceled(object sender, EventArgs e) => Frame.GoBack();
     }
 }

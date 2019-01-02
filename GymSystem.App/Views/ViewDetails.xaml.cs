@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -42,21 +41,21 @@ namespace GymSystem.App
             }
             else
             {
-                //prawie 
-                //int id = (int)e.Parameter;
-                //for (int i = 0; i < App.ViewModel.Customers.Count; i++)
-                //{
-                //    if (id == App.ViewModel.Customers[i].Model.Id)
-                //    {
-                //        ViewModel = new CustomerViewModel()
-                //        {
-                //            IsNewCustomer = true,
-                //            IsInEdit = true
-                //        };
+                int id = (int)e.Parameter;
+                for (int i = 0; i < App.ViewModel.Customers.Count; i++)
+                {
+                    if (id == App.ViewModel.Customers[i].Model.Id)
+                    {
+                        ViewModel = new CustomerViewModel()
+                        {
+                            IsNewCustomer = true,
+                            IsInEdit = true,
+                            Model = App.ViewModel.Customers[i].Model
+                        };
+                        
+                    }
 
-                //    }
-
-                //}
+                }
             }
 
             ViewModel.AddNewCustomerCanceled += AddNewCustomerCanceled;

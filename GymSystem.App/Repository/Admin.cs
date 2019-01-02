@@ -14,7 +14,8 @@ namespace GymSystem.App.Models
         {
             using (var m = new Model())
             {
-                var ret=  m.PersonSet.Add(p);
+                var ret = m.PersonSet.Add(p);
+                m.AddressSet.Add(p.Adress);
                 m.SaveChanges();
                 return ret.Entity;
             }
@@ -56,12 +57,12 @@ namespace GymSystem.App.Models
 
         }
 
-        public Task GetEnterance(int enteranceid)
+        public Entrance GetEntrance(int entranceid)
         {
             throw new NotImplementedException();
         }
 
-        public  Task<DateTime> GetEnteranceLog(Entrance p)
+        public Task<DateTime> GetEnteranceLog(Entrance p)
         {
             throw new NotImplementedException();
         }
