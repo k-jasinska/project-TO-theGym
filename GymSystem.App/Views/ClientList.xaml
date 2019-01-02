@@ -90,7 +90,7 @@
                 <controls:DataGridTextColumn Header="Surname"  Binding="{Binding Surname}" />
                 <controls:DataGridTextColumn Header="Email" Binding="{Binding Email}" />
                     <controls:DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
-                <controls:DataGridTextColumn Header="Place" Binding="{Binding Place}" />
+                <controls:DataGridTextColumn Header="Place" Binding="{Binding City}" />
                         <controls:DataGridTextColumn Header="Street" Binding="{Binding Street}" />
                 <controls:DataGridTextColumn Header="Code"  Binding="{Binding Code}" />
                

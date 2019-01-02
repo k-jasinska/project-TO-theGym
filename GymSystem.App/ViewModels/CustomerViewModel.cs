@@ -153,7 +153,7 @@ namespace GymSystem.App
             }
             else
             {
-                await App.Repository.ModifyCustomer(Model);
+                App.Repository.ModifyCustomer(Model);
             }
         }
         public void StartEdit() => IsInEdit = true;

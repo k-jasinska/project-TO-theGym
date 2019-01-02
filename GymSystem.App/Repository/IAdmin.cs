@@ -11,7 +11,7 @@ namespace GymSystem.App.Models
     {
         Task<Person> AddCustomer(Person p);
         Task DeleteCustomer(Person p);
-        Task ModifyCustomer(Person p);
+        void ModifyCustomer(Person p);
         Task<Entrance> GetCustomerEntrances(Person p);
         Task AddEnterance(Entrance p);
         Task<Person> SearchCustomerByEmail(string email = "");

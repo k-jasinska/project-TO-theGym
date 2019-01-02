@@ -14,8 +14,7 @@ namespace GymSystem.App.Models
         {
             using (var m = new Model())
             {
-                var ret = m.PersonSet.Add(p);
-                m.AddressSet.Add(p.Adress);
+                var ret = m.PersonSet.Add(p); //This function adds 'p' without Address
                 m.SaveChanges();
                 return ret.Entity;
             }
@@ -77,9 +76,13 @@ namespace GymSystem.App.Models
             throw new NotImplementedException();
         }
 
-        public Task ModifyCustomer(Person p)
+        public void ModifyCustomer(Person p)
         {
-            throw new NotImplementedException();
+            using (var m = new Model())
+            {
+                var ret = m.PersonSet.Update(p);
+                m.SaveChanges();
+            }
         }
 
         public Task<Person> SearchCustomerByEmail(string email = "")
