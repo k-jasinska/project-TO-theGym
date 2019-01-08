@@ -1,0 +1,23 @@
+.tile-item{
+    min-height: 80px;
+    background-color: #fff;
+    border: 1px solid lightgrey;
+}
+.tile-item-title{
+    color: #242f3a;
+    line-height: 2.5rem;
+    text-align: left;
+    box-sizing: border-box;
+    font-size: 23px;
+    clear:both;
+}
+.tile-item-description{
+    color: #000;
+    font-size:12px;
+    line-height:14px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+}
+
