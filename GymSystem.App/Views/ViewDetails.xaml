@@ -2,7 +2,7 @@
     x:Class="GymSystem.App.ViewDetails"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:GymSystem.App"
+    xmlns:local="using:GymSystem.Localization"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
@@ -61,7 +61,7 @@
                                 x:Name="name"
                                 MinWidth="140"
                                 Margin="0,8,16,8"
-                                Header="Name"
+                                Header="{x:Bind local:Resources.ColumnHeaderName}"
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.AlignLeftWithPanel="True"
                                 Text="{x:Bind ViewModel.Name, Mode=TwoWay}"
@@ -71,7 +71,7 @@
                                 x:Name="surname"
                                 MinWidth="140"
                                 Margin="0,8,16,8"
-                                Header="Surname"
+                                Header="{x:Bind local:Resources.ColumnHeaderSurname}"
                                IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.RightOf="name"
                                 Text="{x:Bind ViewModel.Surname, Mode=TwoWay}"
@@ -83,7 +83,7 @@
                                 Grid.Row="1"
                                 MinWidth="140"
                                 Margin="0,8,16,0"
-                                Header="e-mail"
+                                Header="{x:Bind local:Resources.ColumnHeaderEmail}"
                                 RelativePanel.AlignLeftWithPanel="True"
                                 RelativePanel.Below="name"
                                 Text="{x:Bind ViewModel.Email, Mode=TwoWay}" />
@@ -93,7 +93,7 @@
                                 Grid.Column="1"
                                 MinWidth="140"
                                 Margin="0,8,16,0"
-                                Header="Phone"
+                                Header="{x:Bind local:Resources.ColumnHeaderPhone}"
                                 RelativePanel.Below="surname"
                                 RelativePanel.RightOf="Email"
                                 Text="{x:Bind ViewModel.Phone, Mode=TwoWay}" />
@@ -102,7 +102,7 @@
                                 Grid.Column="2"
                                 MinWidth="140"
                                 Margin="0,8,16,0"
-                                Header="Place"
+                                Header="{x:Bind local:Resources.ColumnHeaderCity}"
                                 RelativePanel.Below="surname"
                                 RelativePanel.RightOf="Phone"
                                 Text="{x:Bind ViewModel.City, Mode=TwoWay}" />
@@ -111,7 +111,7 @@
                                 Grid.Column="2"
                                 MinWidth="140"
                                 Margin="0,8,16,0"
-                                Header="Street"
+                                Header="{x:Bind local:Resources.ColumnHeaderStreet}"
                                 
                                 RelativePanel.Below="Email"
                                 Text="{x:Bind ViewModel.Street, Mode=TwoWay}" />
@@ -120,7 +120,7 @@
                                 Grid.Column="2"
                                 MinWidth="140"
                                 Margin="0,8,16,0"
-                                Header="Code"
+                                Header="{x:Bind local:Resources.ColumnHeaderPostalCode}"
                                 RelativePanel.Below="Phone"
                                 RelativePanel.RightOf="Street"
                                 Text="{x:Bind ViewModel.Code, Mode=TwoWay}" />
@@ -148,21 +148,28 @@
                                 x:Name="StartDate"
                                 MinWidth="140"
                                 Margin="0,8,16,8"
-                                Header="Start"
+                                Header="{x:Bind local:Resources.EntrancePropertiesStartDate}"
                                 RelativePanel.AlignLeftWithPanel="True"
                               />
                             <DatePicker
                                 x:Name="EndDate"
                                 MinWidth="140"
                                 Margin="0,8,16,8"
-                                Header="End"
+                                Header="{x:Bind local:Resources.EntrancePropertiesEndDate}"
                                 RelativePanel.RightOf="StartDate"
                               />
 
                             <!--<ComboBox x:Name="type" Header="Type" ItemsSource="{x:Bind ViewModel.EnteranceTypes}" SelectedItem="{x:Bind ViewModel.EnteranceTypeSelected,Mode=TwoWay}" HorizontalAlignment="Left" Margin="0,8,16,8" VerticalAlignment="Top" MinWidth="140" RelativePanel.RightOf="EndDate">
                            
                             </ComboBox>-->
-                            <ComboBox x:Name="type" Header="Type"  HorizontalAlignment="Left" Margin="0,8,16,8" VerticalAlignment="Top" MinWidth="140" RelativePanel.RightOf="EndDate">
+                            <ComboBox 
+                                x:Name="type" 
+                                Header="{x:Bind local:Resources.EntrancePropertiesType}"  
+                                HorizontalAlignment="Left" 
+                                Margin="0,8,16,8" 
+                                VerticalAlignment="Top" 
+                                MinWidth="140" 
+                                RelativePanel.RightOf="EndDate">
 
                             </ComboBox>
 

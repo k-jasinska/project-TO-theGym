@@ -94,6 +94,11 @@
   <ItemGroup>
     <Compile Include="Repository\Admin.cs" />
     <Compile Include="Repository\IAdmin.cs" />
+    <Compile Include="Resources.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resw</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BindableBase.cs" />
     <Compile Include="ViewModels\Converters.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -127,6 +132,11 @@
     </AppxManifest>
     <None Include="ClassDiagram2.cd" />
     <None Include="GymSystem.App_TemporaryKey.pfx" />
+    <PRIResource Include="Resources.resw">
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.cs</LastGenOutput>
+      <CustomToolNamespace>GymSystem.Localization</CustomToolNamespace>
+    </PRIResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\tlo.png" />

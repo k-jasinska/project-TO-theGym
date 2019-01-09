@@ -2,7 +2,7 @@
     x:Class="GymSystem.App.AddEntranceToCustomer"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:GymSystem.App"
+    xmlns:local="using:GymSystem.Localization"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -23,10 +23,10 @@
                     Label="Cancel"/>
             
         </CommandBar>
-        <TextBlock HorizontalAlignment="Left" Margin="265,250,0,0" Text="Type" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
-        <TextBlock HorizontalAlignment="Left" Margin="265,320,0,0" Text="Price" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
-        <TextBlock HorizontalAlignment="Left" Margin="265,390,0,0" Text="Start date" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
-        <TextBlock HorizontalAlignment="Left" Margin="265,460,0,0" Text="End date" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
+        <TextBlock HorizontalAlignment="Left" Margin="265,250,0,0" Text="{x:Bind local:Resources.EntrancePropertiesType}" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
+        <TextBlock HorizontalAlignment="Left" Margin="265,320,0,0" Text="{x:Bind local:Resources.EntrancePropertiesPrice}" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
+        <TextBlock HorizontalAlignment="Left" Margin="265,390,0,0" Text="{x:Bind local:Resources.EntrancePropertiesStartDate}" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
+        <TextBlock HorizontalAlignment="Left" Margin="265,460,0,0" Text="{x:Bind local:Resources.EntrancePropertiesEndDate}" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
 
 
         <!--<ComboBox x:Name="carnetType"  ItemsSource="{x:Bind ViewModel.}" SelectedItem="{x:Bind ViewModel.EnteranceTypeSelected,Mode=TwoWay}"  HorizontalAlignment="Left" Margin="431,250,0,0" VerticalAlignment="Top" Width="145">-->    
