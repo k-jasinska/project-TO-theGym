@@ -47,7 +47,7 @@
                         <toolkit:Expander.Header>
                             <Grid>
                                 <TextBlock 
-                                    Text="General"
+                                    Text="{x:Bind local:Resources.CollapseAddress}"
                                     Style="{ThemeResource SubtitleTextBlockStyle}"/>
                                 <TextBlock
                                    
@@ -135,7 +135,7 @@
                         <toolkit:Expander.Header>
                             <Grid>
                                 <TextBlock
-                                    Text="Entrance"
+                                    Text="{x:Bind local:Resources.CollapseEntrance}"
                                     Style="{ThemeResource SubtitleTextBlockStyle}"/>
                                 
                             </Grid>

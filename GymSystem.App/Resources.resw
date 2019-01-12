@@ -135,6 +135,12 @@
   <data name="ButtonLabelRefresh" xml:space="preserve">
     <value>Refresh</value>
   </data>
+  <data name="CollapseAddress" xml:space="preserve">
+    <value>Address and personal data</value>
+  </data>
+  <data name="CollapseEntrance" xml:space="preserve">
+    <value>Entrance</value>
+  </data>
   <data name="ColumnHeaderCity" xml:space="preserve">
     <value>City</value>
   </data>

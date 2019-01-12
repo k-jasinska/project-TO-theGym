@@ -47,7 +47,6 @@ namespace GymSystem.App.Models
                     m.SaveChanges();
                 }
             });
- 
         }
 
         public Task<Entrance> GetCustomerEntrances(Person p)
@@ -89,11 +88,11 @@ namespace GymSystem.App.Models
         {
             throw new NotImplementedException();
         }
-        public async  Task<List<Person>> GetCustomers()
+        public async Task<List<Person>> GetCustomers()
         {
-             using (var m = new Model())
+            using (var m = new Model())
             {
-              return  m.PersonSet.ToList();
+                return m.PersonSet.ToList();
             }
         }
     }

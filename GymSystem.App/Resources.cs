@@ -17,7 +17,7 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 01/09/2019 20:19:17
+// 	Generated: 01/12/2019 17:19:18
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
 namespace GymSystem.Localization
@@ -115,6 +115,28 @@ namespace GymSystem.Localization
             get
             {
                 return resourceLoader.GetString("ButtonLabelRefresh");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "Address and personal data"
+        /// </summary>
+        public static string CollapseAddress
+        {
+            get
+            {
+                return resourceLoader.GetString("CollapseAddress");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "Entrance"
+        /// </summary>
+        public static string CollapseEntrance
+        {
+            get
+            {
+                return resourceLoader.GetString("CollapseEntrance");
             }
         }
         
