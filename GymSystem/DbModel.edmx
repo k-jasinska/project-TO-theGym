@@ -171,8 +171,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Person" Relationship="DbModel.EntrancePerson" FromRole="Entrance" ToRole="Person" />
           <NavigationProperty Name="EntranceType" Relationship="DbModel.EntranceTypeEntrance" FromRole="Entrance" ToRole="EntranceType" />
-          <Property Name="BeginDate" Type="DateTime" Nullable="false" />
-          <Property Name="EndDate" Type="DateTime" Nullable="false" />
+          <Property Name="BeginDate" Type="DateTimeOffset" Nullable="false" />
+          <Property Name="EndDate" Type="DateTimeOffset" Nullable="false" />
           <NavigationProperty Name="EntranceLog" Relationship="DbModel.EntranceLogEntrance" FromRole="Entrance" ToRole="EntranceLog" />
         </EntityType>
         <Association Name="EntrancePerson">

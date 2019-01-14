@@ -94,6 +94,7 @@
   <ItemGroup>
     <Compile Include="Repository\Admin.cs" />
     <Compile Include="Repository\IAdmin.cs" />
+    <Compile Include="Repository\ReceiptGenerator.cs" />
     <Compile Include="Resources.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -101,6 +102,7 @@
     </Compile>
     <Compile Include="ViewModels\BindableBase.cs" />
     <Compile Include="ViewModels\Converters.cs" />
+    <Compile Include="ViewModels\EntranceViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\AddEntranceToCustomer.xaml.cs">
       <DependentUpon>AddEntranceToCustomer.xaml</DependentUpon>

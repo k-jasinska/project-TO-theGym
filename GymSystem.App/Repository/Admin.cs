@@ -27,11 +27,18 @@ namespace GymSystem.App.Models
               
             }
         }
-        public Task AddEnterance(Entrance p)
+        public void AddEntrance(Entrance en)
+        {
+            using (var m = new Model())
+            {
+                var ret = m.EntranceSet.Add(en);
+                m.SaveChanges();
+            }
+        }
+        public Task ModifyEntrance(Entrance en)
         {
             throw new NotImplementedException();
         }
-
         public Task AddEnteranceLog(Entrance p, DateTime date)
         {
             throw new NotImplementedException();
@@ -65,11 +72,20 @@ namespace GymSystem.App.Models
             throw new NotImplementedException();
         }
 
-        public Task<Entrance> GetEnterances()
+        public List<Entrance> GetAllEntrances()
         {
-            throw new NotImplementedException();
+            using (var m = new Model())
+            {
+                return m.EntranceSet.ToList();
+            }
         }
-
+        public List<EntranceType> GetAllEntranceTypes()
+        {
+            using (var m = new Model())
+            {
+                return m.EntranceTypeSet.ToList();
+            }
+        }
         public Task IsValidEnterance(int enteranceid)
         {
             throw new NotImplementedException();

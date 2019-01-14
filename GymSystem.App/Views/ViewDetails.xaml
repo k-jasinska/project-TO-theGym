@@ -15,7 +15,7 @@
             <TextBlock x:Name="PageTitle"/>
 
             <CommandBar
-                 x:Name="mainCommandBar"
+                x:Name="mainCommandBar"
                 HorizontalAlignment="Stretch"
                 Background="Transparent">
                 <AppBarButton    Click="{x:Bind ViewModel.SaveAsync}"

@@ -38,8 +38,7 @@ namespace GymSystem.App
                 CustomerSearchBox.AutoSuggestBox.PlaceholderText = "Search customers...";
             }
         }
-        private async void CustomerSearchBox_TextChanged(AutoSuggestBox sender,
-         AutoSuggestBoxTextChangedEventArgs args)
+        private async void CustomerSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             // We only want to get results when it was a user typing,
             // otherwise we assume the value got filled in by TextMemberPath
