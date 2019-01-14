@@ -17,7 +17,7 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 01/12/2019 17:19:18
+// 	Generated: 01/14/2019 22:14:36
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
 namespace GymSystem.Localization
@@ -64,7 +64,7 @@ namespace GymSystem.Localization
         }
         
         /// <summary>
-        /// Localized resource similar to "Add Entrance"
+        /// Localized resource similar to "Add Ticket"
         /// </summary>
         public static string ButtonLabelAddEntrance
         {
@@ -229,6 +229,17 @@ namespace GymSystem.Localization
         }
         
         /// <summary>
+        /// Localized resource similar to "Duration"
+        /// </summary>
+        public static string EntrancePropertiesDuration
+        {
+            get
+            {
+                return resourceLoader.GetString("EntrancePropertiesDuration");
+            }
+        }
+        
+        /// <summary>
         /// Localized resource similar to "End date"
         /// </summary>
         public static string EntrancePropertiesEndDate
@@ -236,6 +247,17 @@ namespace GymSystem.Localization
             get
             {
                 return resourceLoader.GetString("EntrancePropertiesEndDate");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "Name"
+        /// </summary>
+        public static string EntrancePropertiesName
+        {
+            get
+            {
+                return resourceLoader.GetString("EntrancePropertiesName");
             }
         }
         

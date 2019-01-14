@@ -8,22 +8,26 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid Style="{StaticResource GidStyle}">
 
-        <NavigationView x:Name="navView"
-                         ItemInvoked="NavigationView_ItemInvoked"
-                         BackRequested="NavView_BackRequested" IsBackEnabled="{x:Bind AppFrame.CanGoBack, Mode=OneWay}"
-                        Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <NavigationView 
+            x:Name="navView"
+            ItemInvoked="NavigationView_ItemInvoked"
+            BackRequested="NavView_BackRequested" 
+            IsBackEnabled="{x:Bind AppFrame.CanGoBack, Mode=OneWay}"
+            Margin="0,0,0,0" 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch" RequestedTheme="Default">
             <NavigationView.MenuItems>
                 <!--<NavigationViewItemHeader Content="Konta"/>
                 <NavigationViewItem Icon="AddFriend" Content="{x:Bind DodajKlienta}" Tag="new"  />
                 <NavigationViewItem Icon="Edit" Content="Edytuj dane" Tag="edit" />
                 <NavigationViewItem Icon="Find" Content="Wyświetl uprawnienia klienta" Tag="edit" />-->
-                <NavigationViewItem  x:Name="CustomerListMenuItem" Icon="ContactInfo" Content="{x:Bind ListaKlientow}" Tag="list" />
+                <NavigationViewItem  x:Name="CustomerListMenuItem" Icon="ContactInfo" Content="{x:Bind ViewCustomers}" Tag="list" />
                 <!--<NavigationViewItem Icon="Delete" Content="Usuń konto" Tag="edit" />
                 <NavigationViewItemSeparator/>
                 <NavigationViewItemHeader Content="Karnety"/>
-                <NavigationViewItem Icon="Add" Content="{x:Bind NowyKarnet}" Tag="carnet" />
-                <NavigationViewItem Icon="Edit" Content="Edytuj karnet" Tag="carnet" />-->
-                <NavigationViewItem  x:Name="EntranceListMenuItem" Icon="List" Content="{x:Bind ListaKarnetow}" Tag="SamplePage4" />
+                <NavigationViewItem Icon="Add" Content="{x:Bind NowyKarnet}" Tag="carnet" /> -->
+                <NavigationViewItem  x:Name="EntranceListMenuItem" Icon="List" Content="{x:Bind ViewTickets}" Tag="SamplePage4" />
+                <NavigationViewItem x:Name="SettingsListMenuItem" Icon="Setting" Content="{x:Bind ViewSettings}" Tag="settings" />
             </NavigationView.MenuItems>
 
 

@@ -55,8 +55,8 @@ namespace GymSystem.App.ViewModels
             {
                 await DispatcherHelper.ExecuteOnUIThreadAsync(() => IsLoading = true);
 
-            var customers = await App.Repository.GetCustomers();
-                if (customers == null)
+            var localCustomers = await App.Repository.GetCustomers();
+                if (localCustomers == null)
                 {
                     return;
                 }
@@ -64,7 +64,7 @@ namespace GymSystem.App.ViewModels
                 await DispatcherHelper.ExecuteOnUIThreadAsync(() =>
                 {
                     Customers.Clear();
-                    foreach (var c in customers)
+                    foreach (var c in localCustomers)
                     {
                         Customers.Add(new CustomerViewModel(c));
                     }

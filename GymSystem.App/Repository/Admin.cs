@@ -19,6 +19,25 @@ namespace GymSystem.App.Models
                 return ret.Entity;
             }
         }
+        public void ModifyCustomer(Person p)
+        {
+            using (var m = new Model())
+            {
+                var ret = m.PersonSet.Update(p);
+                m.SaveChanges();
+            }
+        }
+        public async Task DeleteCustomer(Person p)
+        {
+            await Task.Run(() =>
+            {
+                using (var m = new Model())
+                {
+                    var ret = m.PersonSet.Remove(p);
+                    m.SaveChanges();
+                }
+            });
+        }
         public async Task<Person> GetCustomer(int id)
         {
             using (var m = new Model())
@@ -44,18 +63,6 @@ namespace GymSystem.App.Models
             throw new NotImplementedException();
         }
 
-        public async Task DeleteCustomer(Person p)
-        {
-            await Task.Run(() =>
-            {
-                using (var m = new Model())
-                {
-                    var ret = m.PersonSet.Remove(p);
-                    m.SaveChanges();
-                }
-            });
-        }
-
         public Task<Entrance> GetCustomerEntrances(Person p)
         {
             throw new NotImplementedException();
@@ -79,26 +86,13 @@ namespace GymSystem.App.Models
                 return m.EntranceSet.ToList();
             }
         }
-        public List<EntranceType> GetAllEntranceTypes()
-        {
-            using (var m = new Model())
-            {
-                return m.EntranceTypeSet.ToList();
-            }
-        }
+        
         public Task IsValidEnterance(int enteranceid)
         {
             throw new NotImplementedException();
         }
 
-        public void ModifyCustomer(Person p)
-        {
-            using (var m = new Model())
-            {
-                var ret = m.PersonSet.Update(p);
-                m.SaveChanges();
-            }
-        }
+        
 
         public Task<Person> SearchCustomerByEmail(string email = "")
         {
@@ -109,6 +103,34 @@ namespace GymSystem.App.Models
             using (var m = new Model())
             {
                 return m.PersonSet.ToList();
+            }
+        }
+        public void AddEntranceType(EntranceType et)
+        {
+            var ret = m.EntranceTypeSet.Add(et);
+            m.SaveChanges();
+        }
+        public void ModifyEntranceType(EntranceType et)
+        {
+            m.EntranceTypeSet.Update(et);
+            m.SaveChanges();
+        }
+        public async Task DeleteEntranceType(EntranceType et)
+        {
+            await Task.Run(() =>
+            {
+                using (var m = new Model())
+                {
+                    var ret = m.EntranceTypeSet.Remove(et);
+                    m.SaveChanges();
+                }
+            });
+        }
+        public List<EntranceType> GetAllEntranceTypes()
+        {
+            using (var m = new Model())
+            {
+                return m.EntranceTypeSet.ToList();
             }
         }
     }

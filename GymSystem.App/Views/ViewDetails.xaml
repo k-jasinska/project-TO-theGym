@@ -31,6 +31,7 @@
 
             <ScrollViewer
                 x:Name="DetailPanel"
+                Margin="0,40,0,0"
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
                 RelativePanel.Below="PageTitle"
@@ -38,7 +39,7 @@
                 VerticalScrollMode="Auto">
 
                 <StackPanel 
-                    Margin="0,40,4,0">
+                    Margin="0,0,0,0">
                     <toolkit:Expander
                         IsExpanded="True"
                         HorizontalContentAlignment="Left" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
@@ -213,7 +214,7 @@
                                 HeadersVisibility="Column"
                                 IsReadOnly="False"
                                 RowDetailsVisibilityMode="Collapsed"
-                                SelectionMode="Extended">
+                                SelectionMode="Extended" Width="400" Height="250">
                                 <toolkit:DataGrid.Columns>
                                     
                                     <toolkit:DataGridTextColumn Header="Id"/>

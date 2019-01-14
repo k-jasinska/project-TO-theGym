@@ -46,8 +46,22 @@
                             IsEnabled="{x:Bind vm:Converters.IsNotNull(ViewModel.SelectedCustomer), Mode=OneWay}"
                           Icon="Shop" Label="{x:Bind local:Resources.ButtonLabelAddEntrance}" Click="AddEntrance_Click" />
             <AppBarSeparator />
-            <AppBarButton x:Name="deleteButton" Click="DeletePerson_Click"  Icon="Delete" Label="{x:Bind local:Resources.ButtonLabelDelete}" />
-            <AppBarButton x:Name="refreshButton"   Click="{x:Bind ViewModel.Sync}" Icon="Refresh" Label="{x:Bind local:Resources.ButtonLabelRefresh}" />
+            <AppBarButton x:Name="deleteButton" Click="DeletePerson_Click"  Icon="Delete" Label="{x:Bind local:Resources.ButtonLabelDelete}" Background="{x:Null}" >
+                <AppBarButton.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF3C2621"/>
+                        <GradientStop Color="#FFF30A0A" Offset="1"/>
+                    </LinearGradientBrush>
+                </AppBarButton.Foreground>
+            </AppBarButton>
+            <AppBarButton x:Name="refreshButton"   Click="{x:Bind ViewModel.Sync}" Label="{x:Bind local:Resources.ButtonLabelRefresh}" Background="{x:Null}" Icon="Refresh" >
+                <AppBarButton.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF20DFE8"/>
+                        <GradientStop Color="#FF0063F1" Offset="1"/>
+                    </LinearGradientBrush>
+                </AppBarButton.Foreground>
+            </AppBarButton>
             <uc:CollapsibleSearchBox
                 x:Name="CustomerSearchBox"
                 Margin="4,0,-265,0"
@@ -89,11 +103,11 @@
                 <controls:DataGridTextColumn Header="{x:Bind local:Resources.ColumnHeaderName}" Binding="{Binding Name}"/>
                 <controls:DataGridTextColumn Header="{x:Bind local:Resources.ColumnHeaderSurname}"  Binding="{Binding Surname}" />
                 <controls:DataGridTextColumn Header="{x:Bind local:Resources.ColumnHeaderEmail}" Binding="{Binding Email}" />
-                    <controls:DataGridTextColumn Header="{x:Bind local:Resources.ColumnHeaderPhone}" Binding="{Binding Phone}"/>
+                <controls:DataGridTextColumn Header="{x:Bind local:Resources.ColumnHeaderPhone}" Binding="{Binding Phone}"/>
                 <controls:DataGridTextColumn Header="{x:Bind local:Resources.ColumnHeaderCity}" Binding="{Binding City}" />
-                        <controls:DataGridTextColumn Header="{x:Bind local:Resources.ColumnHeaderStreet}" Binding="{Binding Street}" />
+                <controls:DataGridTextColumn Header="{x:Bind local:Resources.ColumnHeaderStreet}" Binding="{Binding Street}" />
                 <controls:DataGridTextColumn Header="{x:Bind local:Resources.ColumnHeaderPostalCode}"  Binding="{Binding Code}" />
-               
+
             </controls:DataGrid.Columns>
 
         </controls:DataGrid>

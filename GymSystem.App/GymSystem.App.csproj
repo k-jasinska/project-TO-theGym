@@ -104,6 +104,7 @@
     <Compile Include="ViewModels\Converters.cs" />
     <Compile Include="ViewModels\EntranceViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\AddEntranceToCustomer.xaml.cs">
       <DependentUpon>AddEntranceToCustomer.xaml</DependentUpon>
     </Compile>
@@ -126,6 +127,9 @@
     </Compile>
     <Compile Include="Views\CollapsibleSearchBox.xaml.cs">
       <DependentUpon>CollapsibleSearchBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewSettings.xaml.cs">
+      <DependentUpon>ViewSettings.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +187,10 @@
     <Page Include="Views\CollapsibleSearchBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ViewSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

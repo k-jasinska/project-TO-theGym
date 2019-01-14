@@ -11,7 +11,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 //Szablon elementu Pusta strona jest udokumentowany na stronie https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x415
@@ -41,13 +40,17 @@ namespace GymSystem.App
                 {
                     navView.SelectedItem = EntranceListMenuItem;
                 }
-                
+                else if(e.SourcePageType == typeof(ViewSettings))
+                {
+                    navView.SelectedItem = SettingsListMenuItem;
+                }
             }
         }
 
-        public readonly string ListaKlientow = "Customer list";
-        public readonly string ListaKarnetow = "Entrance list";
- 
+        public readonly string ViewCustomers = "Customer list";
+        public readonly string ViewTickets = "Entrance list";
+        public readonly string ViewSettings = "Settings";
+
 
         private void NavView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
@@ -63,8 +66,9 @@ namespace GymSystem.App
             var label = args.InvokedItem as string;
             var pageType =
                 args.IsSettingsInvoked ? typeof(ClientList) :
-                label == ListaKlientow ? typeof(ClientList) :
-                label == ListaKarnetow ? typeof(EntranceList) : null;
+                label == ViewCustomers ? typeof(ClientList) :
+                label == ViewSettings ? typeof(ViewSettings) :
+                label == ViewTickets ? typeof(EntranceList) : null;
             if (pageType != null && pageType != frame.CurrentSourcePageType)
             {
                 AppFrame.Navigate(pageType);

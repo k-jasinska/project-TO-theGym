@@ -1,0 +1,57 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GymSystem.Localization"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    x:Class="GymSystem.App.ViewSettings"
+    mc:Ignorable="d"
+    >
+
+    <Page.Resources>
+        <DataTemplate x:Key="RowDetailsTemplate"/>
+    </Page.Resources>
+    <Page.Background>
+        <ThemeResource ResourceKey="ApplicationPageBackgroundThemeBrush"/>
+    </Page.Background>
+
+    <Grid>
+
+        <Custom:DataGrid
+            x:Name="dataGrid"
+            Margin="12,96,12,12"
+            HorizontalScrollBarVisibility="Visible"
+            VerticalScrollBarVisibility="Visible"
+            AlternatingRowBackground="Transparent"
+            AlternatingRowForeground="Gray"
+            AreRowDetailsFrozen="False"
+            AreRowGroupHeadersFrozen="True"
+            AutoGenerateColumns="False"
+            CanUserSortColumns="False"
+            CanUserReorderColumns="True"
+            CanUserResizeColumns="True"
+            ColumnHeaderHeight="32"
+            MaxColumnWidth="400"
+            FrozenColumnCount="0"
+            GridLinesVisibility="None"
+            HeadersVisibility="Column"
+            IsReadOnly="False"
+            ItemsSource="{x:Bind Path=ViewModel.EntranceTypes}"
+            SelectedItem="{x:Bind Mode=TwoWay, Path=ViewModel.SelectedType}"
+            RowDetailsTemplate="{StaticResource RowDetailsTemplate}"
+            RowDetailsVisibilityMode="Collapsed"
+            SelectionMode="Extended"
+            RowGroupHeaderPropertyNameAlternative="Range">
+            <Custom:DataGrid.Columns>
+                <Custom:DataGridTextColumn Header="{x:Bind Path=local:Resources.ColumnHeaderId}" />
+                <Custom:DataGridTextColumn Header="{x:Bind Path=local:Resources.EntrancePropertiesName}" Binding="{Binding Name}"/>
+                <Custom:DataGridTextColumn Header="{x:Bind Path=local:Resources.EntrancePropertiesPrice}"  Binding="{Binding Price}" />
+                <Custom:DataGridTextColumn Header="{x:Bind Path=local:Resources.EntrancePropertiesDuration}" Binding="{Binding Duration}" />
+
+            </Custom:DataGrid.Columns>
+
+        </Custom:DataGrid>
+
+    </Grid>
+</Page>

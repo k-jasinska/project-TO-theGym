@@ -121,7 +121,7 @@
     <value>Add</value>
   </data>
   <data name="ButtonLabelAddEntrance" xml:space="preserve">
-    <value>Add Entrance</value>
+    <value>Add Ticket</value>
   </data>
   <data name="ButtonLabelDelete" xml:space="preserve">
     <value>Delete</value>
@@ -165,8 +165,14 @@
   <data name="ColumnHeaderSurname" xml:space="preserve">
     <value>Surname</value>
   </data>
+  <data name="EntrancePropertiesDuration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
   <data name="EntrancePropertiesEndDate" xml:space="preserve">
     <value>End date</value>
+  </data>
+  <data name="EntrancePropertiesName" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="EntrancePropertiesPrice" xml:space="preserve">
     <value>Price</value>
