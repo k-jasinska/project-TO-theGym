@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GymSystem.App.Models;
 using GymSystem.App.ViewModels;
@@ -9,7 +10,17 @@ namespace GymSystem.App
     public class EntranceViewModel : BindableBase, IEditableObject
     {
         private Entrance _model;
-        private string _name;
+        public EntranceViewModel(Entrance en = null) //constructor
+        {
+            if (en == null)
+            {
+                en = new Entrance();
+                en.BeginDate = new DateTimeOffset(DateTime.Now);
+                en.EndDate = new DateTimeOffset(DateTime.Now).AddDays(1);
+                en.EntranceType = new EntranceType();
+            }
+            this._model = en;
+        }
         public Entrance Model
         {
             get => _model;
@@ -39,14 +50,27 @@ namespace GymSystem.App
             set => Set(ref _isInEdit, value);
         }
 
+
+        public string SelectedType
+        {
+            get => Model.EntranceType.Name;
+            set
+            {
+                List<EntranceType> list = App.Repository.GetAllEntranceTypes();
+                foreach (EntranceType et in list)
+                {
+                    if(et.Name==value)
+                    {
+                        Model.EntranceType = et;
+                        EntranceType = et;
+                        Price = (float)et.Price;
+                    }
+                }
+            }
+        }
         public Action<object, EventArgs> AddEntranceCanceled { get; internal set; }
 
-        public EntranceViewModel(Entrance en = null) //constructor
-        {
-            if (en == null)
-                en = new Entrance();
-            this._model = en;
-        }
+        
 
         public int Id
         {
@@ -69,9 +93,9 @@ namespace GymSystem.App
                 if (value != Model.BeginDate)
                 {
                     Model.BeginDate = value;
+                    EndDate = value.AddDays(EntranceType.Duration);
                     IsModified = true;
                     OnPropertyChanged();
-
                 }
             }
         }
@@ -85,7 +109,6 @@ namespace GymSystem.App
                     Model.EndDate = value;
                     IsModified = true;
                     OnPropertyChanged();
-
                 }
             }
         }
@@ -115,7 +138,15 @@ namespace GymSystem.App
                 }
             }
         }
-        public System.Collections.Generic.ICollection<EntranceLog> EntranceLog
+        public float Price
+        {
+            get => (float)Model.EntranceType.Price;
+            set
+            {
+                OnPropertyChanged();
+            }
+        }
+        public ICollection<EntranceLog> EntranceLog
         {
             get => Model.EntranceLog;
             set
@@ -128,7 +159,10 @@ namespace GymSystem.App
                 }
             }
         }
-
+        public List<string> TicketTypes
+        {
+            get => GetTicketTypesNames();
+        }
         public bool IsModified { get; private set; }
         public async Task SaveAsync()
         {
@@ -172,6 +206,16 @@ namespace GymSystem.App
         public void RefreshCustomer()
         {
             Model = App.Repository.GetEntrance(Model.Id);
+        }
+        
+        public List<string> GetTicketTypesNames()
+        {
+            var list = App.Repository.GetAllEntranceTypes();
+            var ret = new List<string>();
+            foreach(EntranceType et in list) {
+                ret.Add(et.Name);
+            }
+            return ret;
         }
     }
 }

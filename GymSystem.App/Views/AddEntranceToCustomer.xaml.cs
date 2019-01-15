@@ -24,7 +24,7 @@ namespace GymSystem.App
     public sealed partial class AddEntranceToCustomer : Page
     {
        public EntranceViewModel ViewModel { get; set; } = new EntranceViewModel();
-
+        
       
         public AddEntranceToCustomer()
         {

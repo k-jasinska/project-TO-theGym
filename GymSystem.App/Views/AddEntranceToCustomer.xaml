@@ -26,38 +26,37 @@
 
         </CommandBar>
         <TextBlock HorizontalAlignment="Left" Margin="265,250,0,0" Text="{x:Bind local:Resources.EntrancePropertiesType}" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
-        <TextBlock HorizontalAlignment="Left" Margin="265,320,0,0" Text="{x:Bind local:Resources.EntrancePropertiesPrice}" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
-        <TextBlock HorizontalAlignment="Left" Margin="265,390,0,0" Text="{x:Bind local:Resources.EntrancePropertiesStartDate}" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
-        <TextBlock HorizontalAlignment="Left" Margin="265,460,0,0" Text="{x:Bind local:Resources.EntrancePropertiesEndDate}" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
+        <TextBlock HorizontalAlignment="Left" Margin="265,361,0,0" Text="{x:Bind local:Resources.EntrancePropertiesPrice}" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
+        <TextBlock HorizontalAlignment="Left" Margin="265,307,0,0" Text="{x:Bind local:Resources.EntrancePropertiesStartDate}" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
+        <TextBlock HorizontalAlignment="Left" Margin="265,415,0,0" Text="{x:Bind local:Resources.EntrancePropertiesEndDate}" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
 
-
-        <!--<ComboBox x:Name="carnetType"  ItemsSource="{x:Bind ViewModel.}" SelectedItem="{x:Bind ViewModel.EnteranceTypeSelected,Mode=TwoWay}"  HorizontalAlignment="Left" Margin="431,250,0,0" VerticalAlignment="Top" Width="145">-->
-        <!--</ComboBox>-->
 
         <ComboBox 
-            x:Name="carnetType"   
+            x:Name="carnetType"
+            ItemsSource="{x:Bind ViewModel.TicketTypes}"
+            SelectedItem="{x:Bind ViewModel.SelectedType, Mode=TwoWay}"
             HorizontalAlignment="Left" 
             Margin="431,250,0,0" 
             VerticalAlignment="Top" 
-            Width="296">
+            Width="296" TabIndex="0">
         </ComboBox>
         <TextBox 
             x:Name="price"
             HorizontalAlignment="Left"
-            Margin="431,320,0,0"
+            Margin="431,361,0,0"
             VerticalAlignment="Top"
             Height="32"
-            Text="{x:Bind ViewModel.EntranceType.Price, Mode=TwoWay}"
-            Width="296" />
+            Text="{x:Bind ViewModel.Price, Mode=OneWay}"
+            Width="296" IsReadOnly="True" RequestedTheme="Default" InputScope="CurrencyAmount" />
         <DatePicker 
             Date="{x:Bind ViewModel.BeginDate, Mode=TwoWay}"
             HorizontalAlignment="Left" 
-            Margin="431,390,0,0"
-            VerticalAlignment="Top"/>
+            Margin="431,307,0,0"
+            VerticalAlignment="Top" TabIndex="1" IsTabStop="True"/>
         <DatePicker
-            Date="{x:Bind ViewModel.EndDate, Mode=TwoWay}"
+            Date="{x:Bind ViewModel.EndDate, Mode=OneWay}"
             HorizontalAlignment="Left" 
-            Margin="431,460,0,0" 
+            Margin="431,415,0,0" 
             VerticalAlignment="Top"/>
 
     </Grid>
