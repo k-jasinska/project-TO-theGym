@@ -16,44 +16,43 @@ namespace GymSystem.App
         }
         public SettingsViewModel ViewModel { get; set; } = new SettingsViewModel();
 
-        private void CreateClient_Click(object sender, RoutedEventArgs e)
+        private async void AddTicketType_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(ViewDetails), null, new DrillInNavigationTransitionInfo());
+            ViewModel.AddTicketType();
+            await ViewModel.GetEnTypesListAsync();
         }
 
-        private void ViewDetails_Click(object sender, RoutedEventArgs e)
-        {
-            if (ViewModel.SelectedType != null)
-            {
-                Frame.Navigate(typeof(ViewDetails), ViewModel.SelectedType.Model.Id,
-                    new DrillInNavigationTransitionInfo());
-            }
-        }
-
-        private void AddEntrance_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(AddEntranceToCustomer), null, new DrillInNavigationTransitionInfo());
-        }
-
-
-        private async void DeleteEntrance_Click(object sender, RoutedEventArgs e)
+        private async void DeleteTicketType_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var deleteOrder = ViewModel.SelectedType;
-                await ViewModel.DeleteEnType(deleteOrder);
+                if (ViewModel.SelectedType != null)
+                {
+                    var deleteOrder = ViewModel.SelectedType;
+                    await ViewModel.DeleteEnType(deleteOrder);
+                }
+                else
+                {
+                    var dialog = new ContentDialog()
+                    {
+                        Title = "No one ticket type selected",
+                        Content = "Firstly select ticket type, then click delete again.",
+                        PrimaryButtonText = "OK"
+                    };
+                    await dialog.ShowAsync();
+                }
             }
             catch (Exception ex)
             {
                 var dialog = new ContentDialog()
                 {
-                    Title = "Unable to delete entrance type",
+                    Title = "Unable to delete ticket type",
                     Content = $"There was an error when we tried to delete \n{ex.Message}",
                     PrimaryButtonText = "OK"
                 };
                 await dialog.ShowAsync();
             }
+            await ViewModel.GetEnTypesListAsync();
         }
-
     }
 }

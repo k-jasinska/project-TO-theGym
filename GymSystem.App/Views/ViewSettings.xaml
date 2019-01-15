@@ -17,10 +17,29 @@
     </Page.Background>
 
     <Grid>
+        <StackPanel Orientation="Horizontal" Margin="12,12,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="708">
+            <TextBlock Text="Ticket types" VerticalAlignment="Center" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10,0,5,0" ></TextBlock>
+            <AppBarButton x:Name="addTicketTypeButton" Click="AddTicketType_Click" Icon="Add" Label="{x:Bind local:Resources.ButtonLabelAdd}" FocusVisualPrimaryBrush="Black" >
+                <AppBarButton.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF54B900" Offset="0.124"/>
+                        <GradientStop Color="#FF336A2A" Offset="1"/>
+                    </LinearGradientBrush>
+                </AppBarButton.Foreground>
+            </AppBarButton>
+            <AppBarButton x:Name="deleteButton" Click="DeleteTicketType_Click"  Icon="Delete" Label="{x:Bind local:Resources.ButtonLabelDelete}" Background="{x:Null}" >
+                <AppBarButton.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF3C2621"/>
+                        <GradientStop Color="#FFF30A0A" Offset="1"/>
+                    </LinearGradientBrush>
+                </AppBarButton.Foreground>
+            </AppBarButton>
 
+        </StackPanel>
         <Custom:DataGrid
             x:Name="dataGrid"
-            Margin="12,96,12,12"
+            Margin="12,96,0,12"
             HorizontalScrollBarVisibility="Visible"
             VerticalScrollBarVisibility="Visible"
             AlternatingRowBackground="Transparent"
@@ -42,7 +61,7 @@
             RowDetailsTemplate="{StaticResource RowDetailsTemplate}"
             RowDetailsVisibilityMode="Collapsed"
             SelectionMode="Extended"
-            RowGroupHeaderPropertyNameAlternative="Range">
+            RowGroupHeaderPropertyNameAlternative="Range" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="708">
             <Custom:DataGrid.Columns>
                 <Custom:DataGridTextColumn Header="{x:Bind Path=local:Resources.ColumnHeaderId}" />
                 <Custom:DataGridTextColumn Header="{x:Bind Path=local:Resources.EntrancePropertiesName}" Binding="{Binding Name}"/>

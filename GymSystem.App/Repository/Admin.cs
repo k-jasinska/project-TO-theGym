@@ -107,13 +107,19 @@ namespace GymSystem.App.Models
         }
         public void AddEntranceType(EntranceType et)
         {
-            var ret = m.EntranceTypeSet.Add(et);
-            m.SaveChanges();
+            using (var m = new Model())
+            {
+                var ret = m.EntranceTypeSet.Add(et);
+                m.SaveChanges();
+            }
         }
         public void ModifyEntranceType(EntranceType et)
         {
-            m.EntranceTypeSet.Update(et);
-            m.SaveChanges();
+            using (var m = new Model())
+            {
+                m.EntranceTypeSet.Update(et);
+                m.SaveChanges();
+            }
         }
         public async Task DeleteEntranceType(EntranceType et)
         {

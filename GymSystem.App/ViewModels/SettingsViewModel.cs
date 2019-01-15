@@ -128,6 +128,16 @@ namespace GymSystem.App.ViewModels
             });
         }
 
+        internal void AddTicketType()
+        {
+            EntranceType et = new EntranceType
+            {
+                Duration = 0,
+                Name = "",
+                Price = 0
+            };
+            App.Repository.AddEntranceType(et);
+        }
         internal async Task DeleteEnType(EntranceTypeViewModel deleteOrder)
         {
             await App.Repository.DeleteEntranceType(deleteOrder.Model);

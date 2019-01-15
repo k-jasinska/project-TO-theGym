@@ -48,29 +48,29 @@ namespace GymSystem.App.ViewModels
                 set => Set(ref _isLoading, value);
             }
 
-            /// <summary>
-            /// Gets the complete list of customers from the database.
-            /// </summary>
-            public async Task GetCustomerListAsync()
-            {
-                await DispatcherHelper.ExecuteOnUIThreadAsync(() => IsLoading = true);
+        /// <summary>
+        /// Gets the complete list of customers from the database.
+        /// </summary>
+        public async Task GetCustomerListAsync()
+        {
+            await DispatcherHelper.ExecuteOnUIThreadAsync(() => IsLoading = true);
 
             var localCustomers = await App.Repository.GetCustomers();
-                if (localCustomers == null)
-                {
-                    return;
-                }
-
-                await DispatcherHelper.ExecuteOnUIThreadAsync(() =>
-                {
-                    Customers.Clear();
-                    foreach (var c in localCustomers)
-                    {
-                        Customers.Add(new CustomerViewModel(c));
-                    }
-                    IsLoading = false;
-                });
+            if (localCustomers == null)
+            {
+                return;
             }
+
+            await DispatcherHelper.ExecuteOnUIThreadAsync(() =>
+            {
+                Customers.Clear();
+                foreach (var c in localCustomers)
+                {
+                    Customers.Add(new CustomerViewModel(c));
+                }
+                IsLoading = false;
+            });
+        }
 
         internal async Task DeletePerson(CustomerViewModel deleteOrder)
         {
