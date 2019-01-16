@@ -18,8 +18,45 @@ namespace GymSystem.App
                 en.BeginDate = new DateTimeOffset(DateTime.Now);
                 en.EndDate = new DateTimeOffset(DateTime.Now).AddDays(1);
                 en.EntranceType = new EntranceType();
+                en.EntranceLog = new List<EntranceLog>();
+                IsNewEntrance = true;
             }
             this._model = en;
+        }
+
+        //this constructor tries to retrieve Entrance from given Person
+        public EntranceViewModel(Person p) //constructor
+        {
+            Entrance en = new Entrance();
+            if(p != null && p.Entrance != null && p.Entrance.Count > 0)
+            {
+                en = p.Entrance[0];
+                IsNewEntrance = false;
+            }
+            else if (App.Repository.GetEntrance(p.Id) != null)
+            {
+                en = App.Repository.GetEntrance(p.Id);
+                IsNewEntrance = false;
+            }
+            else if (p != null)
+            {
+                en.Person = p;
+                en.Id = p.Id;
+                en.BeginDate = new DateTimeOffset(DateTime.Now);
+                en.EndDate = new DateTimeOffset(DateTime.Now).AddDays(1);
+                en.EntranceType = new EntranceType();
+                en.EntranceLog = new List<EntranceLog>();
+                IsNewEntrance = true;
+            }
+            else
+            {
+                en.BeginDate = new DateTimeOffset(DateTime.Now);
+                en.EndDate = new DateTimeOffset(DateTime.Now).AddDays(1);
+                en.EntranceType = new EntranceType();
+                en.EntranceLog = new List<EntranceLog>();
+                IsNewEntrance = true;
+            }
+            _model = en;
         }
         public Entrance Model
         {
@@ -175,7 +212,7 @@ namespace GymSystem.App
             }
             else
             {
-                await App.Repository.ModifyEntrance(Model);
+                App.Repository.ModifyEntrance(Model);
             }
         }
         public void StartEdit() => IsInEdit = true;

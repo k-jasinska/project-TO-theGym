@@ -1,6 +1,4 @@
-﻿using GymSystem.App.Models;
-using GymSystem.App.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,6 +11,8 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
+using GymSystem.Db;
+using GymSystem.App.ViewModels;
 
 //Szablon elementu Pusta strona jest udokumentowany na stronie https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -44,7 +44,7 @@ namespace GymSystem.App
             }
             else
             {
-               
+                ViewModel = new EntranceViewModel((Person)e.Parameter);
             }
 
             ViewModel.AddEntranceCanceled += AddEntranceCanceled;

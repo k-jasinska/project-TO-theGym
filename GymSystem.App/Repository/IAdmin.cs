@@ -18,7 +18,7 @@ namespace GymSystem.App.Models
         Task<Person> SearchCustomerByEmail(string email = "");
 
         void AddEntrance(Entrance en);
-        Task ModifyEntrance(Entrance en);
+        void ModifyEntrance(Entrance en);
         Entrance GetEntrance(int entranceid);
         List<Entrance> GetAllEntrances();
         Task AddEnteranceLog(Entrance p, DateTime date);

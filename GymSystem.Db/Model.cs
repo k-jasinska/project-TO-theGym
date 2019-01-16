@@ -72,7 +72,7 @@ namespace GymSystem.Db
         public string Phone { get; set; }
         public string Mail { get; set; }
 
-        public virtual ICollection<Entrance> Entrance { get; set; }
+        public virtual List<Entrance> Entrance { get; set; }
         public virtual Address Adress { get; set; }
     }
 }

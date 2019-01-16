@@ -44,7 +44,7 @@ namespace GymSystem.App
         public CustomerViewModel(Person c = null) //constructor
         {
             if (c == null)
-                c = new Person(); 
+                c = new Person();
             this._model = c;
         }
 

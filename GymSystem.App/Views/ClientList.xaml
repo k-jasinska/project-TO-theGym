@@ -42,9 +42,12 @@
                     Label="{x:Bind local:Resources.ButtonLabelDetails}" IsEnabled="{x:Bind vm:Converters.IsNotNull(ViewModel.SelectedCustomer), Mode=OneWay}"
                     ToolTipService.ToolTip="View details" Click="ViewDetails_Click" />
             <AppBarButton x:Name="addClientButton" Click="CreateClient_Click" Icon="Add" Label="{x:Bind local:Resources.ButtonLabelAdd}" />
-            <AppBarButton x:Name="addEntrButton"
-                            IsEnabled="{x:Bind vm:Converters.IsNotNull(ViewModel.SelectedCustomer), Mode=OneWay}"
-                          Icon="Shop" Label="{x:Bind local:Resources.ButtonLabelAddEntrance}" Click="AddEntrance_Click" />
+            <AppBarButton 
+                x:Name="addEntrButton"
+                IsEnabled="{x:Bind vm:Converters.IsNotNull(ViewModel.SelectedCustomer), Mode=OneWay}"
+                Icon="Shop" 
+                Label="{x:Bind local:Resources.ButtonLabelAddEntrance}" 
+                Click="AddEntrance_Click" />
             <AppBarSeparator />
             <AppBarButton x:Name="deleteButton" Click="DeletePerson_Click"  Icon="Delete" Label="{x:Bind local:Resources.ButtonLabelDelete}" Background="{x:Null}" >
                 <AppBarButton.Foreground>

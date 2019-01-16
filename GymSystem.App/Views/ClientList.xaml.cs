@@ -47,7 +47,7 @@ namespace GymSystem.App
 
         private void AddEntrance_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(AddEntranceToCustomer), null, new DrillInNavigationTransitionInfo());
+            Frame.Navigate(typeof(AddEntranceToCustomer), ViewModel.SelectedCustomer.Model, new DrillInNavigationTransitionInfo());
         }
 
 
