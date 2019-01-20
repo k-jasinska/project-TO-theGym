@@ -8,8 +8,7 @@ namespace GymSystem.Db
 {
     public partial class Model : DbContext
     {
-    
-    
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=GymSystem.db");

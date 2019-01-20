@@ -33,15 +33,9 @@ namespace GymSystem.App
                 en = p.Entrance[0];
                 IsNewEntrance = false;
             }
-            else if (App.Repository.GetEntrance(p.Id) != null)
-            {
-                en = App.Repository.GetEntrance(p.Id);
-                IsNewEntrance = false;
-            }
             else if (p != null)
             {
                 en.Person = p;
-                en.Id = p.Id;
                 en.BeginDate = new DateTimeOffset(DateTime.Now);
                 en.EndDate = new DateTimeOffset(DateTime.Now).AddDays(1);
                 en.EntranceType = new EntranceType();

@@ -1,4 +1,5 @@
 ﻿using GymSystem.Db;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,6 @@ namespace GymSystem.App.Models
             using (var m = new Model())
             {
                 var ret = m.PersonSet.Add(p); //This function adds 'p' without Address
-                p.Adress.Id = p.Id;
-                m.AddressSet.Add(p.Adress);
                 m.SaveChanges();
                 return ret.Entity;
             }
@@ -44,8 +43,7 @@ namespace GymSystem.App.Models
         {
             using (var m = new Model())
             {
-                Person ret = m.PersonSet.FirstOrDefault(x => x.Id == id);
-                ret.Adress = m.AddressSet.FirstOrDefault(x => x.Id == id);
+                Person ret = m.PersonSet.Include(p => p.Adress).FirstOrDefault(x => x.Id == id);
                 return ret;
             }
         }
@@ -54,7 +52,7 @@ namespace GymSystem.App.Models
             using (var m = new Model())
             {
                 m.SaveChanges();
-                return m.PersonSet.ToList();
+                return m.PersonSet.Include(p => p.Adress).ToList();
             }
         }
         public void AddEntrance(Entrance en)
@@ -102,7 +100,7 @@ namespace GymSystem.App.Models
         {
             using (var m = new Model())
             {
-                return m.EntranceSet.ToList();
+                return m.EntranceSet.Include(e => e.EntranceType).Include(e => e.EntranceLog).ToList();
             }
         }
 
