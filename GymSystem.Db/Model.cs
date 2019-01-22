@@ -24,8 +24,8 @@ namespace GymSystem.Db
     {
   
         public int Id { get; set; }
-        public System.DateTimeOffset BeginDate { get; set; }
-        public System.DateTimeOffset EndDate { get; set; }
+        public DateTimeOffset BeginDate { get; set; }
+        public DateTimeOffset EndDate { get; set; }
 
         public virtual Person Person { get; set; }
         public virtual EntranceType EntranceType { get; set; } //Price, duration depends on type
@@ -44,7 +44,7 @@ namespace GymSystem.Db
     public partial class EntranceLog
     {
         public int Id { get; set; }
-        public string Date { get; set; }
+        public DateTimeOffset Date { get; set; }
 
         public virtual Entrance Entrance { get; set; }
     }

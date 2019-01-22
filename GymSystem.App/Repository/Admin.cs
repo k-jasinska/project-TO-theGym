@@ -3,19 +3,17 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GymSystem.App.Models
 {
     public class Admin : IAdmin
     {
-        Model m;
         public async Task<Person> AddCustomer(Person p)
         {
             using (var m = new Model())
             {
-                var ret = m.PersonSet.Add(p); //This function adds 'p' without Address
+                var ret = m.PersonSet.Add(p);
                 m.SaveChanges();
                 return ret.Entity;
             }
@@ -39,7 +37,7 @@ namespace GymSystem.App.Models
                 }
             });
         }
-        public async Task<Person> GetCustomer(int id)
+        public Person GetCustomer(int id)
         {
             using (var m = new Model())
             {
@@ -51,7 +49,6 @@ namespace GymSystem.App.Models
         {
             using (var m = new Model())
             {
-                m.SaveChanges();
                 return m.PersonSet.Include(p => p.Adress).ToList();
             }
         }
@@ -71,9 +68,17 @@ namespace GymSystem.App.Models
                 m.SaveChanges();
             }
         }
-        public Task AddEnteranceLog(Entrance p, DateTime date)
+        public async Task AddEntranceLog(Entrance en, DateTimeOffset date)
         {
-            throw new NotImplementedException();
+            using (var m = new Model())
+            {
+                EntranceLog el = new EntranceLog
+                {
+                    Date = date,
+                    Entrance = en
+                };
+                await m.EntranceLogSet.AddAsync(el);
+            }
         }
 
         public Task<Entrance> GetCustomerEntrances(Person p)
@@ -86,8 +91,7 @@ namespace GymSystem.App.Models
         {
             using (var m = new Model())
             {
-                var a = m.EntranceSet.FirstOrDefault(x => x.Id == entranceid);
-                return m.EntranceSet.Find(entranceid);
+                return m.EntranceSet.Include(e => e.EntranceType).Include(e => e.EntranceLog).FirstOrDefault(x => x.Id == entranceid);
             }
         }
 
@@ -104,9 +108,14 @@ namespace GymSystem.App.Models
             }
         }
 
-        public Task IsValidEnterance(int enteranceid)
+        public bool IsValidEnterance(int entranceid)
         {
-            throw new NotImplementedException();
+            using (var m = new Model())
+            {
+                var en = m.EntranceSet.FirstOrDefault(x => x.Id == entranceid);
+                if (en.BeginDate <= DateTimeOffset.Now && en.EndDate >= DateTimeOffset.Now) return true;
+                else return false;
+            }
         }
 
 

@@ -190,7 +190,7 @@ namespace GymSystem.App
         }
         public async Task RefreshCustomerAsync()
         {
-            Model = await App.Repository.GetCustomer(Model.Id);
+            Model = App.Repository.GetCustomer(Model.Id);
         }
     }
 }
