@@ -95,9 +95,12 @@ namespace GymSystem.App
             {
                 if (value != Model.Mail)
                 {
-                    Model.Mail = value;
-                    IsModified = true;
-                    OnPropertyChanged();
+                    if (value.Contains("@") && value.Contains(".")) //Check if string is mail address
+                    {
+                        Model.Mail = value;
+                        IsModified = true;
+                        OnPropertyChanged();
+                    }
                 }
             }
         }
@@ -108,9 +111,12 @@ namespace GymSystem.App
             {
                 if (value != Model.Adress.City)
                 {
-                    Model.Adress.City = value;
-                    IsModified = true;
-                    OnPropertyChanged();
+                    if (value.Length > 2)
+                    {
+                        Model.Adress.City = value.ToCharArray()[0].ToString().ToUpper() + value.Substring(1); //Capital letter
+                        IsModified = true;
+                        OnPropertyChanged();
+                    }
                 }
             }
         }
@@ -120,11 +126,14 @@ namespace GymSystem.App
             get => Model.Adress.Code;
             set
             {
-                if (value != Model.Adress.Code)
+                if (value != Model.Adress.Code && value.Length>0)
                 {
-                    Model.Adress.Code = value;
-                    IsModified = true;
-                    OnPropertyChanged();
+                    if (value.ToCharArray()[0] >= '0' && value.ToCharArray()[0] <= '9')
+                    {
+                        Model.Adress.Code = value;
+                        IsModified = true;
+                        OnPropertyChanged();
+                    }
                 }
             }
         }
@@ -135,9 +144,12 @@ namespace GymSystem.App
             {
                 if (value != Model.Adress.Street)
                 {
-                    Model.Adress.Street = value;
-                    IsModified = true;
-                    OnPropertyChanged();
+                    if (value.Split(" ").Length > 1) //This variable must consist of street name and building number
+                    {
+                        Model.Adress.Street = value;
+                        IsModified = true;
+                        OnPropertyChanged();
+                    }
                 }
             }
         }
