@@ -23,7 +23,6 @@
                     Click="{x:Bind ViewModel.CancelEditsAsync}"
                     Icon="Cancel"
                     Label="Cancel"/>
-
         </CommandBar>
         <TextBlock HorizontalAlignment="Left" Margin="265,250,0,0" Text="{x:Bind local:Resources.EntrancePropertiesType}" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
         <TextBlock HorizontalAlignment="Left" Margin="265,361,0,0" Text="{x:Bind local:Resources.EntrancePropertiesPrice}" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="107"/>
@@ -32,32 +31,36 @@
 
 
         <ComboBox 
-            x:Name="carnetType"
+            x:Name="ticketType"
             ItemsSource="{x:Bind ViewModel.TicketTypes}"
             SelectedItem="{x:Bind ViewModel.SelectedType, Mode=TwoWay}"
             HorizontalAlignment="Left" 
             Margin="431,250,0,0" 
             VerticalAlignment="Top" 
-            Width="296" TabIndex="0">
-        </ComboBox>
+            Width="296" TabIndex="0"/>
         <TextBox 
-            x:Name="price"
+            x:Name="priceLbl"
             HorizontalAlignment="Left"
             Margin="431,361,0,0"
             VerticalAlignment="Top"
             Height="32"
             Text="{x:Bind ViewModel.Price, Mode=OneWay}"
-            Width="296" IsReadOnly="True" RequestedTheme="Default" InputScope="CurrencyAmount" />
+            Width="296" 
+            IsReadOnly="True"
+            InputScope="CurrencyAmount"/>
         <DatePicker 
+            x:Name="startDatePicker" 
             Date="{x:Bind ViewModel.BeginDate, Mode=TwoWay}"
             HorizontalAlignment="Left" 
             Margin="431,307,0,0"
-            VerticalAlignment="Top" TabIndex="1" IsTabStop="True"/>
-        <DatePicker
+            VerticalAlignment="Top" 
+            IsTabStop="True"
+            TabIndex="1"/>
+        <DatePicker 
+            x:Name="endDatePicker"
             Date="{x:Bind ViewModel.EndDate, Mode=OneWay}"
             HorizontalAlignment="Left" 
             Margin="431,415,0,0" 
             VerticalAlignment="Top"/>
-
     </Grid>
 </Page>

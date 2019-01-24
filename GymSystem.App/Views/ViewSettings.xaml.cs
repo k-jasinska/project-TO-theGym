@@ -1,7 +1,6 @@
 ﻿using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
 using GymSystem.App.ViewModels;
 namespace GymSystem.App
 {

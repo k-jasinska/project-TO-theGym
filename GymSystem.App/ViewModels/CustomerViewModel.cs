@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using GymSystem.App.Models;
 using GymSystem.App.ViewModels;
@@ -55,9 +56,16 @@ namespace GymSystem.App
             {
                 if (value != Model.Name)
                 {
-                    Model.Name = value;
-                    IsModified = true;
-                    OnPropertyChanged();
+                    if (DataTester.IsValidSurname(value))
+                    {
+                        Model.Name = value.ToCharArray()[0].ToString().ToUpper() + value.Substring(1); //Capital letter
+                        IsModified = true;
+                        OnPropertyChanged();
+                    }
+                    else
+                    {
+                        ClientList.InvalidDataDialog("Incorrect name", value + " is not a name.");
+                    }
                 }
             }
         }
@@ -68,10 +76,16 @@ namespace GymSystem.App
             {
                 if (value != Model.Surname)
                 {
-                    Model.Surname = value;
-                    IsModified = true;
-                    OnPropertyChanged();
- 
+                    if (DataTester.IsValidSurname(value))
+                    {
+                        Model.Surname = value.ToCharArray()[0].ToString().ToUpper() + value.Substring(1); //Capital letter
+                        IsModified = true;
+                        OnPropertyChanged();
+                    }
+                    else
+                    {
+                        ClientList.InvalidDataDialog("Incorrect surname", value + " is not a surname.");
+                    }
                 }
             }
         }
@@ -82,9 +96,17 @@ namespace GymSystem.App
             {
                 if (value != Model.Phone)
                 {
-                    Model.Phone = value;
-                    IsModified = true;
-                    OnPropertyChanged();
+                    //Phone number can contain only digits or digits preceded by the "+"
+                    if (value.Length > 3 && (value.Substring(1).Any(char.IsDigit) || (value.ToCharArray()[0] == "+".ToCharArray()[0] && value.Substring(0, 1).Any(char.IsDigit))))
+                    {
+                        Model.Phone = value;
+                        IsModified = true;
+                        OnPropertyChanged();
+                    }
+                    else
+                    {
+                        ClientList.InvalidDataDialog("Incorrect phone number.", value + " is not a phone number.");
+                    }
                 }
             }
         }
@@ -95,11 +117,15 @@ namespace GymSystem.App
             {
                 if (value != Model.Mail)
                 {
-                    if (value.Contains("@") && value.Contains(".")) //Check if string is mail address
+                    if (DataTester.IsValidEmail(value)) //Check value using Regex
                     {
                         Model.Mail = value;
                         IsModified = true;
                         OnPropertyChanged();
+                    }
+                    else
+                    {
+                        ClientList.InvalidDataDialog("Incorrect email address.", value + " is not an email address.");
                     }
                 }
             }
@@ -111,11 +137,15 @@ namespace GymSystem.App
             {
                 if (value != Model.Adress.City)
                 {
-                    if (value.Length > 2)
+                    if (value.Length > 2 || !value.Any(char.IsDigit))
                     {
                         Model.Adress.City = value.ToCharArray()[0].ToString().ToUpper() + value.Substring(1); //Capital letter
                         IsModified = true;
                         OnPropertyChanged();
+                    }
+                    else
+                    {
+                        ClientList.InvalidDataDialog("Incorrect city", "City name can not contain any numbers.");
                     }
                 }
             }
@@ -133,6 +163,10 @@ namespace GymSystem.App
                         Model.Adress.Code = value;
                         IsModified = true;
                         OnPropertyChanged();
+                    }
+                    else
+                    {
+                        ClientList.InvalidDataDialog("Incorrect postal code", value + " is not a postal code.");
                     }
                 }
             }

@@ -52,6 +52,15 @@ namespace GymSystem.App.Models
                 return m.PersonSet.Include(p => p.Adress).ToList();
             }
         }
+        public Task<Entrance> GetCustomerEntrances(Person p)
+        {
+            throw new NotImplementedException();
+        }
+        public Task<Person> SearchCustomerByEmail(string email = "")
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddEntrance(Entrance en)
         {
             using (var m = new Model())
@@ -68,6 +77,24 @@ namespace GymSystem.App.Models
                 m.SaveChanges();
             }
         }
+        public async Task DeleteEntrance(Entrance en)
+        {
+            await Task.Run(() =>
+            {
+                using (var m = new Model())
+                {
+                    var ret = m.EntranceSet.Remove(en);
+                    m.SaveChanges();
+                }
+            });
+        }
+        public Entrance GetEntrance(int entranceid)
+        {
+            using (var m = new Model())
+            {
+                return m.EntranceSet.Include(e => e.EntranceType).Include(e => e.EntranceLog).FirstOrDefault(x => x.Id == entranceid);
+            }
+        }
         public async Task AddEntranceLog(Entrance en, DateTimeOffset date)
         {
             using (var m = new Model())
@@ -81,25 +108,10 @@ namespace GymSystem.App.Models
             }
         }
 
-        public Task<Entrance> GetCustomerEntrances(Person p)
-        {
-            throw new NotImplementedException();
-
-        }
-
-        public Entrance GetEntrance(int entranceid)
-        {
-            using (var m = new Model())
-            {
-                return m.EntranceSet.Include(e => e.EntranceType).Include(e => e.EntranceLog).FirstOrDefault(x => x.Id == entranceid);
-            }
-        }
-
-        public Task<DateTime> GetEnteranceLog(Entrance p)
+        public Task<DateTime> GetEntranceLog(Entrance p)
         {
             throw new NotImplementedException();
         }
-
         public List<Entrance> GetAllEntrances()
         {
             using (var m = new Model())
@@ -107,8 +119,7 @@ namespace GymSystem.App.Models
                 return m.EntranceSet.Include(e => e.EntranceType).Include(e => e.EntranceLog).ToList();
             }
         }
-
-        public bool IsValidEnterance(int entranceid)
+        public bool IsValidEntrance(int entranceid)
         {
             using (var m = new Model())
             {
@@ -119,11 +130,6 @@ namespace GymSystem.App.Models
         }
 
 
-
-        public Task<Person> SearchCustomerByEmail(string email = "")
-        {
-            throw new NotImplementedException();
-        }
 
         public void AddEntranceType(EntranceType et)
         {

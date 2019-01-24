@@ -19,11 +19,12 @@ namespace GymSystem.App.Models
 
         void AddEntrance(Entrance en);
         void ModifyEntrance(Entrance en);
+        Task DeleteEntrance(Entrance en);
         Entrance GetEntrance(int entranceid);
         List<Entrance> GetAllEntrances();
         Task AddEntranceLog(Entrance en, DateTimeOffset date);
-        Task<DateTime> GetEnteranceLog(Entrance p);
-        bool IsValidEnterance(int entranceid);
+        Task<DateTime> GetEntranceLog(Entrance p);
+        bool IsValidEntrance(int entranceid);
 
         void AddEntranceType(EntranceType et);
         void ModifyEntranceType(EntranceType et);

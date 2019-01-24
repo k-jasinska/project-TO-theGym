@@ -22,7 +22,13 @@ namespace GymSystem.Db
     }
     public partial class Entrance
     {
-  
+        public Entrance()
+        {
+            BeginDate = new DateTimeOffset();
+            EndDate = new DateTimeOffset();
+            EntranceType = new EntranceType();
+            EntranceLog = new List<EntranceLog>();
+        }
         public int Id { get; set; }
         public DateTimeOffset BeginDate { get; set; }
         public DateTimeOffset EndDate { get; set; }

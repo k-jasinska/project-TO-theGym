@@ -93,6 +93,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Repository\Admin.cs" />
+    <Compile Include="Repository\DataTester.cs" />
     <Compile Include="Repository\IAdmin.cs" />
     <Compile Include="Resources.cs">
       <AutoGen>True</AutoGen>
@@ -101,6 +102,7 @@
     </Compile>
     <Compile Include="ViewModels\BindableBase.cs" />
     <Compile Include="ViewModels\Converters.cs" />
+    <Compile Include="ViewModels\EntranceListViewModel.cs" />
     <Compile Include="ViewModels\EntranceViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />

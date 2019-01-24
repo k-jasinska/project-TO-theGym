@@ -69,7 +69,16 @@ namespace GymSystem.App
                 await dialog.ShowAsync();
             }
         }
-
+        public static async void InvalidDataDialog(string title, string content)
+        {
+            var dialog = new ContentDialog()
+            {
+                Title = title,
+                Content = content,
+                PrimaryButtonText = "OK"
+            };
+            await dialog.ShowAsync();
+        }
         private void CustomerSearchBox_Loaded(object sender, RoutedEventArgs e)
         {
             if (CustomerSearchBox != null)

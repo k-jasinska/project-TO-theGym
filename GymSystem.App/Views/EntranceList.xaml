@@ -3,12 +3,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:local="using:GymSystem.App"
+    xmlns:local="using:GymSystem.Localization"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     NavigationCacheMode="Required"
-      xmlns:uc="using:GymSystem.App.UserControls"
+    xmlns:uc="using:GymSystem.App.UserControls"
+    xmlns:vm="using:GymSystem.App.ViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -137,14 +138,17 @@
                             CanUserResizeColumns="False"
                             GridLinesVisibility="None"
                             IsReadOnly="True"
+                            ItemsSource="{x:Bind ViewModel.Entrances}"
+                            SelectedItem="{x:Bind ViewModel.SelectedEntrance, Mode=TwoWay}"
                             AutoGenerateColumns="False"
                             Margin="0,0,0,0"
                            Grid.ColumnSpan="7" Height="626" VerticalAlignment="Center">
                             <toolkit:DataGrid.Columns>
 
                                 <toolkit:DataGridTextColumn Header="Entrance Id"/>
-                                <toolkit:DataGridTextColumn Header="Name" />
-                                <toolkit:DataGridTextColumn Header="Surname"  />
+                                <toolkit:DataGridTextColumn Header="Type" Binding="{Binding EntranceType.Name}"/>
+                                <toolkit:DataGridTextColumn Header="Name" Binding="{Binding Person.Name}"/>
+                                <toolkit:DataGridTextColumn Header="Surname" Binding="{Binding Person.Surname}" />
 
                             </toolkit:DataGrid.Columns>
                         </toolkit:DataGrid>
