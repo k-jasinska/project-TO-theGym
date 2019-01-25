@@ -65,7 +65,7 @@ namespace GymSystem.App.Models
         {
             using (var m = new Model())
             {
-                var ret = m.EntranceSet.Add(en);
+                var ret = m.EntranceSet.Attach(en);
                 m.SaveChanges();
             }
         }
@@ -116,7 +116,7 @@ namespace GymSystem.App.Models
         {
             using (var m = new Model())
             {
-                return m.EntranceSet.Include(e => e.EntranceType).Include(e => e.EntranceLog).ToList();
+                return m.EntranceSet.Include(e => e.EntranceType).Include(e => e.EntranceLog).Include(e => e.Person).ToList();
             }
         }
         public bool IsValidEntrance(int entranceid)

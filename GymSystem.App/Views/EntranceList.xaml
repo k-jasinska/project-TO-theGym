@@ -71,10 +71,20 @@
                 x:Name="mainCommandBar"
                 Background="Transparent"
                 RelativePanel.LeftOf="CustomerSearchBox"
-                RelativePanel.RightOf="PageTitle" Margin="27,26,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="165" Height="63">
-
+                RelativePanel.RightOf="PageTitle" Margin="27,26,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="190" Height="63">
+                <AppBarButton 
+                    x:Name="deleteButton" 
+                    Click="DeleteEntrance_Click"  
+                    Icon="Delete" 
+                    Label="{x:Bind local:Resources.ButtonLabelDelete}">
+                    <AppBarButton.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF3C2621"/>
+                            <GradientStop Color="#FFF30A0A" Offset="1"/>
+                        </LinearGradientBrush>
+                    </AppBarButton.Foreground>
+                </AppBarButton>
                 <AppBarButton
-             
                     Icon="Refresh"
                     Label="Refresh" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" />
             </CommandBar>
@@ -122,9 +132,16 @@
                             FontWeight="SemiBold">
                             Entrance status
                             </TextBlock>
-                            <TextBlock Text="wazny/niewazny" />
+                            <TextBlock Text="{x:Bind ViewModel.IsValidEntrance}" />
 
-                            <Button HorizontalAlignment="Left" Content="Add log" Height="42" Margin="40,20,0,0" VerticalAlignment="Center" Width="104" />
+                            <Button 
+                                HorizontalAlignment="Left" 
+                                Content="Add log" 
+                                Height="42"
+                                IsEnabled="{x:Bind vm:Converters.IsNotNull(ViewModel.SelectedEntrance), Mode=OneWay}"
+                                Margin="40,20,0,0" 
+                                VerticalAlignment="Center" 
+                                Width="104" />
                         </StackPanel>
                     </StackPanel>
                 </SplitView.Pane>

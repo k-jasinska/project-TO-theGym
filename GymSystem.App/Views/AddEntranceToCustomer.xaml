@@ -16,7 +16,7 @@
                 HorizontalAlignment="Stretch"
                 Background="Transparent">
             <AppBarButton
-                    Click="{x:Bind ViewModel.SaveAsync}"
+                    Click="SaveBtn_Click"
                     Icon="Save"
                     Label="Save"/>
             <AppBarButton

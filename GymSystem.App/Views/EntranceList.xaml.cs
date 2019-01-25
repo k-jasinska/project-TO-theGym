@@ -18,6 +18,24 @@ namespace GymSystem.App
         }
         public EntranceListViewModel ViewModel { get; set; } = new EntranceListViewModel();
 
+        private async void DeleteEntrance_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var deleteOrder = ViewModel.SelectedEntrance;
+                await ViewModel.DeleteEntrance(deleteOrder);
+            }
+            catch (Exception ex)
+            {
+                var dialog = new ContentDialog()
+                {
+                    Title = "Unable to delete entrance",
+                    Content = $"There was an error when we tried to delete \n{ex.Message}",
+                    PrimaryButtonText = "OK"
+                };
+                await dialog.ShowAsync();
+            }
+        }
         private void CustomerSearchBox_Loaded(object sender, RoutedEventArgs e)
         {
             if (CustomerSearchBox != null)

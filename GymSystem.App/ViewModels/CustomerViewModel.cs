@@ -135,9 +135,9 @@ namespace GymSystem.App
             get => Model.Adress.City;
             set
             {
-                if (value != Model.Adress.City)
+                if (value != Model.Adress.City && value.Length > 2)
                 {
-                    if (value.Length > 2 || !value.Any(char.IsDigit))
+                    if (!value.Any(char.IsDigit))
                     {
                         Model.Adress.City = value.ToCharArray()[0].ToString().ToUpper() + value.Substring(1); //Capital letter
                         IsModified = true;

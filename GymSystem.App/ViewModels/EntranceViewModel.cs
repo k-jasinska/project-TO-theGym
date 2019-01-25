@@ -177,6 +177,10 @@ namespace GymSystem.App
                 OnPropertyChanged();
             }
         }
+        public bool IsValidEntrance
+        {
+            get => Model.BeginDate <= DateTimeOffset.Now && Model.EndDate >= DateTimeOffset.Now;
+        }
         public ICollection<EntranceLog> EntranceLog
         {
             get => Model.EntranceLog;
@@ -199,14 +203,21 @@ namespace GymSystem.App
         {
             IsInEdit = false;
             IsModified = false;
-            if (IsNewEntrance)
+            try
             {
-                IsNewEntrance = false;
-                App.Repository.AddEntrance(Model);
+                if (IsNewEntrance)
+                {
+                    IsNewEntrance = false;
+                    App.Repository.AddEntrance(Model);
+                }
+                else
+                {
+                    App.Repository.ModifyEntrance(Model);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                App.Repository.ModifyEntrance(Model);
+
             }
         }
         public void StartEdit() => IsInEdit = true;

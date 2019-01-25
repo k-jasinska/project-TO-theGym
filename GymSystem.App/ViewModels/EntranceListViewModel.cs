@@ -34,7 +34,17 @@ namespace GymSystem.App.ViewModels
             get => _isLoading;
             set => Set(ref _isLoading, value);
         }
-
+        public string IsValidEntrance
+        {
+            get
+            {
+                if (SelectedEntrance != null && SelectedEntrance.IsValidEntrance)
+                {
+                    return "Valid";
+                }
+                else return "Expired";
+            }
+        }
         // Gets the complete list of entrance from the database.
         public async Task GetEntranceListAsync()
         {
@@ -63,22 +73,12 @@ namespace GymSystem.App.ViewModels
             Sync();
         }
 
-        /// <summary>
-        /// Saves any modified customers and reloads the customer list from the database.
-        /// </summary>
+        // Saves any modified customers and reloads the customer list from the database.
         public void Sync()
         {
             Task.Run(async () =>
             {
-                IsLoading = true;
-                foreach (var modifiedEntrance in Entrances
-                    .Where(en => en.IsModified).Select(en => en.Model))
-                {
-                    //   await App.Repository.Customers.UpsertAsync(modifiedCustomer);
-                }
-
                 await GetEntranceListAsync();
-                IsLoading = false;
             });
         }
     }

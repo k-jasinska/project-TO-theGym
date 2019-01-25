@@ -31,7 +31,11 @@ namespace GymSystem.App
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Disabled;
         }
-
+        private async void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.SaveAsync();
+            Frame.GoBack();
+        }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter == null)

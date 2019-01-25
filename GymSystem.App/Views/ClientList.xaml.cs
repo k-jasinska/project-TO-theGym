@@ -77,7 +77,14 @@ namespace GymSystem.App
                 Content = content,
                 PrimaryButtonText = "OK"
             };
-            await dialog.ShowAsync();
+            try
+            {
+                await dialog.ShowAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
         private void CustomerSearchBox_Loaded(object sender, RoutedEventArgs e)
         {
