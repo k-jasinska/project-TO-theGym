@@ -172,6 +172,10 @@ namespace GymSystem.App
                 }
             }
         }
+        //TODO: Walidacja pól nie może być oparta o ich długość, jeśli nie opuścimy kursora to LostFocus się nie wykona i po kliknięciu zapisz dane pole w którym jest kursor 
+        // się nie zapisze
+        // trzeba zmienić w każdym z pól edytowalnych tryb na OnPropertyChanged, i nie sprawdzać ilości znaków,
+           // bo będą się wtedy dodawać pojedyńczo, lub validować dopiero przy próbie zapisu
         public string City
         {
             get => Model.Adress.City;
