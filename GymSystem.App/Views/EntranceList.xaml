@@ -86,7 +86,7 @@
                 </AppBarButton>
                 <AppBarButton
                     Icon="Refresh"
-                    Label="Refresh" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" />
+                    Label="Refresh" HorizontalAlignment="Center"  Click="{x:Bind ViewModel.Sync}"  Margin="0,0,0,0" VerticalAlignment="Top" />
             </CommandBar>
             <uc:CollapsibleSearchBox
                 x:Name="CustomerSearchBox"
@@ -132,12 +132,12 @@
                             FontWeight="SemiBold">
                             Entrance status
                             </TextBlock>
-                            <TextBlock Text="{x:Bind ViewModel.IsValidEntrance}" />
+                            <TextBlock Text="{x:Bind ViewModel.IsValidEntrance,Mode=OneWay}" />
 
                             <Button 
                                 HorizontalAlignment="Left" 
                                 Content="Add log" 
-                                Height="42"
+                                Height="42" Click="AddLog_Click"
                                 IsEnabled="{x:Bind vm:Converters.IsNotNull(ViewModel.SelectedEntrance), Mode=OneWay}"
                                 Margin="40,20,0,0" 
                                 VerticalAlignment="Center" 
@@ -158,11 +158,10 @@
                             ItemsSource="{x:Bind ViewModel.Entrances}"
                             SelectedItem="{x:Bind ViewModel.SelectedEntrance, Mode=TwoWay}"
                             AutoGenerateColumns="False"
-                            Margin="0,0,0,0"
-                           Grid.ColumnSpan="7" Height="626" VerticalAlignment="Center">
+                            VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                             <toolkit:DataGrid.Columns>
 
-                                <toolkit:DataGridTextColumn Header="Entrance Id"/>
+                                <toolkit:DataGridTextColumn Header="Entrance Id" Binding="{Binding Id}"/>
                                 <toolkit:DataGridTextColumn Header="Type" Binding="{Binding EntranceType.Name}"/>
                                 <toolkit:DataGridTextColumn Header="Name" Binding="{Binding Person.Name}"/>
                                 <toolkit:DataGridTextColumn Header="Surname" Binding="{Binding Person.Surname}" />

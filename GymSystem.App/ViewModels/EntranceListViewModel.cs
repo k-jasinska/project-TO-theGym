@@ -23,7 +23,11 @@ namespace GymSystem.App.ViewModels
         public EntranceViewModel SelectedEntrance
         {
             get => _selectedEntrance;
-            set => Set(ref _selectedEntrance, value);
+            set
+            {
+                Set(ref _selectedEntrance, value);
+                OnPropertyChanged("IsValidEntrance");
+            }
         }
 
         private bool _isLoading = false;
@@ -69,6 +73,7 @@ namespace GymSystem.App.ViewModels
 
         internal async Task DeleteEntrance(EntranceViewModel deleteOrder)
         {
+
             await App.Repository.DeleteEntrance(deleteOrder.Model);
             Sync();
         }
@@ -80,6 +85,11 @@ namespace GymSystem.App.ViewModels
             {
                 await GetEntranceListAsync();
             });
+        }
+
+        internal async Task AddLog(EntranceViewModel entrance)
+        {
+            throw new NotImplementedException();
         }
     }
 }

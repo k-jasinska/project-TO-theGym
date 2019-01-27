@@ -2,6 +2,8 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using GymSystem.App.ViewModels;
+using Microsoft.Toolkit.Uwp.Helpers;
+using System.Linq;
 
 //Szablon elementu Pusta strona jest udokumentowany na stronie https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -47,72 +49,103 @@ namespace GymSystem.App
         }
         private async void CustomerSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            // We only want to get results when it was a user typing,
-            // otherwise we assume the value got filled in by TextMemberPath
-            // or the handler for SuggestionChosen.
+
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                // If no search query is entered, refresh the complete list.
                 if (String.IsNullOrEmpty(sender.Text))
                 {
-                    //await DispatcherHelper.ExecuteOnUIThreadAsync(async () =>
-                    //    await ViewModel.GetCustomerListAsync());
-                    //sender.ItemsSource = null;
+                    await DispatcherHelper.ExecuteOnUIThreadAsync(async () =>
+                          await ViewModel.GetEntranceListAsync());
                 }
                 else
                 {
                     string[] parameters = sender.Text.Split(new char[] { ' ' },
                         StringSplitOptions.RemoveEmptyEntries);
- 
-                    //sender.ItemsSource = ViewModel.Customers
-                    //    .Where(customer => parameters.Any(parameter =>
-                    //        customer.Address.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                    //        customer.FirstName.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                    //        customer.LastName.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                    //        customer.Company.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
-                    //    .OrderByDescending(customer => parameters.Count(parameter =>
-                    //        customer.Address.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                    //        customer.FirstName.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                    //        customer.LastName.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                    //        customer.Company.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
-                    //    .Select(customer => $"{customer.FirstName} {customer.LastName}");
+
+                    sender.ItemsSource = ViewModel.Entrances.Where(customer => parameters
+                        .Any(parameter =>
+                            customer.Id.ToString().StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                            customer.Person.Surname.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                            customer.Person.Name.StartsWith(parameter, StringComparison.OrdinalIgnoreCase))
+                            )
+                        .Select(customer => $"{customer.Id}: {customer.Person.Name} {customer.Person.Surname}");
                 }
             }
         }
         private async void CustomerSearchBox_QuerySubmitted(AutoSuggestBox sender,
          AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            if (String.IsNullOrEmpty(args.QueryText))
+            try
             {
-                //await DispatcherHelper.ExecuteOnUIThreadAsync(async () =>
-                //    await ViewModel.GetCustomerListAsync());
+                if (String.IsNullOrEmpty(args.QueryText))
+                {
+                    await DispatcherHelper.ExecuteOnUIThreadAsync(async () =>
+                        await ViewModel.GetEntranceListAsync());
+                }
+                else
+                {
+                    string[] parameters = sender.Text.Split(new char[] { ' ' },
+                        StringSplitOptions.RemoveEmptyEntries);
+
+                    var matches = ViewModel.Entrances.Where(customer => parameters
+                        .Any(parameter =>
+                            customer.Id.ToString().StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                            customer.Person.Surname.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                            customer.Person.Name.StartsWith(parameter, StringComparison.OrdinalIgnoreCase))
+                            )
+
+                        .ToList();
+
+                    await DispatcherHelper.ExecuteOnUIThreadAsync(() =>
+                    {
+                        ViewModel.Entrances.Clear();
+                        foreach (var match in matches)
+                        {
+                            ViewModel.Entrances.Add(match);
+                        }
+                    });
+                }
             }
-            else
+            catch (Exception ex )
             {
-                string[] parameters = sender.Text.Split(new char[] { ' ' },
-                    StringSplitOptions.RemoveEmptyEntries);
 
-                //var matches = ViewModel.Customers.Where(customer => parameters
-                //    .Any(parameter =>
-                //        customer.Address.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                //        customer.FirstName.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                //        customer.LastName.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                //        customer.Company.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
-                //    .OrderByDescending(customer => parameters.Count(parameter =>
-                //        customer.Address.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                //        customer.FirstName.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                //        customer.LastName.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                //        customer.Company.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
-                //    .ToList();
+                var dialog = new ContentDialog()
+                {
+                    Title = "Error",
+                    Content = $"There was an error during db connection \n{ex.Message}",
+                    PrimaryButtonText = "OK"
+                };
+                await dialog.ShowAsync();
+            }
+        }
 
-                //await DispatcherHelper.ExecuteOnUIThreadAsync(() =>
-                //{
-                //    ViewModel.Customers.Clear();
-                //    foreach (var match in matches)
-                //    {
-                //        ViewModel.Customers.Add(match);
-                //    }
-                //});
+        private async void AddLog_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var entrance = ViewModel.SelectedEntrance;
+                if (entrance.IsValidEntrance)
+                    await ViewModel.AddLog(entrance);
+                else
+                {
+                    var dialog = new ContentDialog()
+                    {
+                        Title = "You shall no pass",
+                        Content = $"Selected entrance is invalid",
+                        PrimaryButtonText = "OK"
+                    };
+                    await dialog.ShowAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                var dialog = new ContentDialog()
+                {
+                    Title = "Unable to delete entrance",
+                    Content = $"There was an error when we tried to delete \n{ex.Message}",
+                    PrimaryButtonText = "OK"
+                };
+                await dialog.ShowAsync();
             }
         }
     }
