@@ -7,8 +7,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:vm="using:GymSystem.App.ViewModels"
+   
+    xmlns:Views1="using:GymSystem.App.Views"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <ResourceDictionary>
+            <Views1:DateFormatConverter x:Name="DateToStringFormatConverter"/>
+            <Views1:DateTimeFormatConverter x:Name="DateTimeToStringFormatConverter"/>
+        </ResourceDictionary>
+    </Page.Resources>
 
     <Grid>
         <RelativePanel>
@@ -19,7 +27,7 @@
                 HorizontalAlignment="Stretch"
                 Background="Transparent">
                 <AppBarButton    Click="{x:Bind ViewModel.SaveAsync}"
-                    Icon="Save" Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}"
+                    Icon="Save" Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}"  
                     Label="Save"/>
                 <AppBarButton  
                     Icon="Cancel"     Click="{x:Bind ViewModel.CancelEditsAsync}"  Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}"
@@ -66,25 +74,27 @@
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.AlignLeftWithPanel="True"
                                 Text="{x:Bind ViewModel.Name, Mode=TwoWay}"
-                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}"
+                             
                                  />
                             <TextBox
                                 x:Name="surname"
                                 MinWidth="140"
                                 Margin="0,8,16,8"
+                                
                                 Header="{x:Bind local:Resources.ColumnHeaderSurname}"
                                IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.RightOf="name"
                                 Text="{x:Bind ViewModel.Surname, Mode=TwoWay}"
-                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}"
+                             
                               />
-                    
+
                             <TextBox
                                 x:Name="Email"
                                 Grid.Row="1"
                                 MinWidth="140"
                                 Margin="0,8,16,0"
                                 Header="{x:Bind local:Resources.ColumnHeaderEmail}"
+                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.AlignLeftWithPanel="True"
                                 RelativePanel.Below="name"
                                 Text="{x:Bind ViewModel.Email, Mode=TwoWay}" />
@@ -94,6 +104,7 @@
                                 Grid.Column="1"
                                 MinWidth="140"
                                 Margin="0,8,16,0"
+                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 Header="{x:Bind local:Resources.ColumnHeaderPhone}"
                                 RelativePanel.Below="surname"
                                 RelativePanel.RightOf="Email"
@@ -103,6 +114,7 @@
                                 Grid.Column="2"
                                 MinWidth="140"
                                 Margin="0,8,16,0"
+                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 Header="{x:Bind local:Resources.ColumnHeaderCity}"
                                 RelativePanel.Below="surname"
                                 RelativePanel.RightOf="Phone"
@@ -112,6 +124,7 @@
                                 Grid.Column="2"
                                 MinWidth="140"
                                 Margin="0,8,16,0"
+                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 Header="{x:Bind local:Resources.ColumnHeaderStreet}"
                                 
                                 RelativePanel.Below="Email"
@@ -121,6 +134,7 @@
                                 Grid.Column="2"
                                 MinWidth="140"
                                 Margin="0,8,16,0"
+                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 Header="{x:Bind local:Resources.ColumnHeaderPostalCode}"
                                 RelativePanel.Below="Phone"
                                 RelativePanel.RightOf="Street"
@@ -138,47 +152,37 @@
                                 <TextBlock
                                     Text="{x:Bind local:Resources.CollapseEntrance}"
                                     Style="{ThemeResource SubtitleTextBlockStyle}"/>
-                                
+
                             </Grid>
                         </toolkit:Expander.Header>
 
                         <RelativePanel Margin="10,0,0,12">
-                       
-                            
-                            <DatePicker
-                                x:Name="StartDate"
-                                MinWidth="140"
-                                Margin="0,8,16,8"
-                                Header="{x:Bind local:Resources.EntrancePropertiesStartDate}"
-                                RelativePanel.AlignLeftWithPanel="True"
-                              />
-                            <DatePicker
-                                x:Name="EndDate"
-                                MinWidth="140"
-                                Margin="0,8,16,8"
-                                Header="{x:Bind local:Resources.EntrancePropertiesEndDate}"
-                                RelativePanel.RightOf="StartDate"
-                              />
 
-                            <!--<ComboBox x:Name="type" Header="Type" ItemsSource="{x:Bind ViewModel.EnteranceTypes}" SelectedItem="{x:Bind ViewModel.EnteranceTypeSelected,Mode=TwoWay}" HorizontalAlignment="Left" Margin="0,8,16,8" VerticalAlignment="Top" MinWidth="140" RelativePanel.RightOf="EndDate">
-                           
-                            </ComboBox>-->
-                            <ComboBox 
-                                x:Name="type" 
-                                Header="{x:Bind local:Resources.EntrancePropertiesType}"  
-                                HorizontalAlignment="Left" 
-                                Margin="0,8,16,8" 
-                                VerticalAlignment="Top" 
-                                MinWidth="140" 
-                                RelativePanel.RightOf="EndDate">
+                            <toolkit:DataGrid  ItemsSource="{x:Bind ViewModel.EntranceList}" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{x:Bind ViewModel.SelectedEntrance, Mode=TwoWay}">
+                                <toolkit:DataGrid.Columns>
+                                    <toolkit:DataGridTextColumn Header="Id" Binding="{Binding Id}"></toolkit:DataGridTextColumn>
 
-                            </ComboBox>
+                                    <!--<toolkit:DataGridTemplateColumn  Header="Valid from">
+                                        <toolkit:DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate DataType="{x:Type DateTime}">
+                                                <TextBlock Text="{Binding BeginDate, StringFormat={0:d}}"  />
+                                            </DataTemplate>
+                                      
+                                        </toolkit:DataGridTemplateColumn.CellTemplate>
+                                    </toolkit:DataGridTemplateColumn>-->
+                                    <toolkit:DataGridTextColumn Header="Valid from" Binding="{Binding BeginDate,Converter={StaticResource DateToStringFormatConverter}}"></toolkit:DataGridTextColumn>
+
+                                    <toolkit:DataGridTextColumn Header="Valid to" Binding="{Binding EndDate,Converter={StaticResource DateToStringFormatConverter}}"></toolkit:DataGridTextColumn>
+                                    <toolkit:DataGridTextColumn Header="Type" Binding="{Binding EntranceType.Name}"></toolkit:DataGridTextColumn>
+
+                                </toolkit:DataGrid.Columns>
+                            </toolkit:DataGrid>
 
                         </RelativePanel>
 
                     </toolkit:Expander>
 
-<!--/////////////////////////-->
+                    <!--/////////////////////////-->
                     <toolkit:Expander
                         IsExpanded="True"
                         HorizontalContentAlignment="Left">
@@ -212,15 +216,14 @@
                                 FrozenColumnCount="0"
                                 GridLinesVisibility="None"
                                 HeadersVisibility="Column"
-                                IsReadOnly="False"
-                                RowDetailsVisibilityMode="Collapsed"
-                                SelectionMode="Extended" Width="400" Height="250">
+                                IsReadOnly="True"
+                      ItemsSource="{x:Bind ViewModel.SelectedEntranceLog,Mode=OneWay}"
+                                 Width="400" Height="250">
                                 <toolkit:DataGrid.Columns>
-                                    
-                                    <toolkit:DataGridTextColumn Header="Id"/>
-                                    <toolkit:DataGridTextColumn Header="Date" />
-                                    <toolkit:DataGridTextColumn Header="Time"  />
-                                    
+
+                                    <toolkit:DataGridTextColumn Width="*" Binding="{Binding Date,Converter={StaticResource DateTimeToStringFormatConverter}}" Header="Date" />
+
+
                                 </toolkit:DataGrid.Columns>
 
                             </toolkit:DataGrid>

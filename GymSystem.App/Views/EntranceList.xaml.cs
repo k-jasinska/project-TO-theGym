@@ -124,8 +124,17 @@ namespace GymSystem.App
             try
             {
                 var entrance = ViewModel.SelectedEntrance;
-                if (entrance.IsValidEntrance)
+                if (entrance?.IsValidEntrance??false)
+                {
                     await ViewModel.AddLog(entrance);
+                    var dialog = new ContentDialog()
+                    {
+                        Title = "OK",
+                        Content = $"Entrance added",
+                        PrimaryButtonText = "OK"
+                    };
+                    await dialog.ShowAsync();
+                }
                 else
                 {
                     var dialog = new ContentDialog()
@@ -141,8 +150,8 @@ namespace GymSystem.App
             {
                 var dialog = new ContentDialog()
                 {
-                    Title = "Unable to delete entrance",
-                    Content = $"There was an error when we tried to delete \n{ex.Message}",
+                    Title = "Unable to add entrance",
+                    Content = $"Can nod add entrance",
                     PrimaryButtonText = "OK"
                 };
                 await dialog.ShowAsync();

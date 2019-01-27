@@ -41,7 +41,13 @@ namespace GymSystem.App.Models
         {
             using (var m = new Model())
             {
-                Person ret = m.PersonSet.Include(p => p.Adress).FirstOrDefault(x => x.Id == id);
+                Person ret = m.PersonSet
+                    .Include(p => p.Adress)
+                    .Include(p => p.Entrance)
+                    .ThenInclude(p => p.EntranceLog)
+                    .Include(p => p.Entrance)
+                    .ThenInclude(p => p.EntranceType)
+                    .FirstOrDefault(x => x.Id == id);
                 return ret;
             }
         }
@@ -102,9 +108,11 @@ namespace GymSystem.App.Models
                 EntranceLog el = new EntranceLog
                 {
                     Date = date,
-                    Entrance = en
+                    Entrance = m.EntranceSet.First(x => x.Id == en.Id),
+
                 };
                 await m.EntranceLogSet.AddAsync(el);
+                m.SaveChanges();
             }
         }
 

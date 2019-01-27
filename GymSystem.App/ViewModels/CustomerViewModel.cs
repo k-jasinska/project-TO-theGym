@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,6 +26,42 @@ namespace GymSystem.App
             }
         }
 
+        private Entrance _SelectedEntrance;
+
+        public Entrance SelectedEntrance
+        {
+            get { return _SelectedEntrance; }
+            set { _SelectedEntrance = value; OnPropertyChanged(); OnPropertyChanged("SelectedEntranceLog"); }
+        }
+        public List<EntranceLog> SelectedEntranceLog { get => SelectedEntrance?.EntranceLog?.ToList(); }
+
+        private ObservableCollection<Entrance> _entrance;
+        public ObservableCollection<Entrance> EntranceList
+        {
+            get
+            {
+                if (_entrance == null)
+                {
+                    _entrance = new ObservableCollection<Entrance>(Model.Entrance);
+                }
+                return _entrance;
+            }
+            set => Set(ref _entrance, value);
+        }
+        private ObservableCollection<EntranceType> _EntranceTypes;
+
+        public ObservableCollection<EntranceType> EntranceTypes
+        {
+            get
+            {
+                if (_EntranceTypes == null)
+                {
+                    _EntranceTypes = new ObservableCollection<EntranceType>(App.Repository.GetAllEntranceTypes());
+                }
+                return _EntranceTypes;
+            }
+
+        }
         private bool _isNewCustomer;
 
         public bool IsNewCustomer
@@ -60,12 +98,13 @@ namespace GymSystem.App
                     {
                         Model.Name = value.ToCharArray()[0].ToString().ToUpper() + value.Substring(1); //Capital letter
                         IsModified = true;
-                        OnPropertyChanged();
+                    
                     }
                     else
                     {
                         ClientList.InvalidDataDialog("Incorrect name", value + " is not a name.");
                     }
+                    OnPropertyChanged();
                 }
             }
         }
@@ -80,12 +119,13 @@ namespace GymSystem.App
                     {
                         Model.Surname = value.ToCharArray()[0].ToString().ToUpper() + value.Substring(1); //Capital letter
                         IsModified = true;
-                        OnPropertyChanged();
+                    
                     }
                     else
                     {
                         ClientList.InvalidDataDialog("Incorrect surname", value + " is not a surname.");
                     }
+                    OnPropertyChanged();
                 }
             }
         }
@@ -101,12 +141,13 @@ namespace GymSystem.App
                     {
                         Model.Phone = value;
                         IsModified = true;
-                        OnPropertyChanged();
+                       
                     }
                     else
                     {
                         ClientList.InvalidDataDialog("Incorrect phone number.", value + " is not a phone number.");
                     }
+                    OnPropertyChanged();
                 }
             }
         }
@@ -121,12 +162,13 @@ namespace GymSystem.App
                     {
                         Model.Mail = value;
                         IsModified = true;
-                        OnPropertyChanged();
                     }
                     else
                     {
                         ClientList.InvalidDataDialog("Incorrect email address.", value + " is not an email address.");
                     }
+                    OnPropertyChanged();
+
                 }
             }
         }
@@ -141,12 +183,13 @@ namespace GymSystem.App
                     {
                         Model.Adress.City = value.ToCharArray()[0].ToString().ToUpper() + value.Substring(1); //Capital letter
                         IsModified = true;
-                        OnPropertyChanged();
+                       
                     }
                     else
                     {
                         ClientList.InvalidDataDialog("Incorrect city", "City name can not contain any numbers.");
                     }
+                    OnPropertyChanged();
                 }
             }
         }
@@ -156,18 +199,19 @@ namespace GymSystem.App
             get => Model.Adress.Code;
             set
             {
-                if (value != Model.Adress.Code && value.Length>0)
+                if (value != Model.Adress.Code && value.Length > 0)
                 {
                     if (value.ToCharArray()[0] >= '0' && value.ToCharArray()[0] <= '9')
                     {
                         Model.Adress.Code = value;
                         IsModified = true;
-                        OnPropertyChanged();
+                      
                     }
                     else
                     {
                         ClientList.InvalidDataDialog("Incorrect postal code", value + " is not a postal code.");
                     }
+                    OnPropertyChanged();
                 }
             }
         }
@@ -178,12 +222,9 @@ namespace GymSystem.App
             {
                 if (value != Model.Adress.Street)
                 {
-                    if (value.Split(" ").Length > 1) //This variable must consist of street name and building number
-                    {
-                        Model.Adress.Street = value;
-                        IsModified = true;
-                        OnPropertyChanged();
-                    }
+                    Model.Adress.Street = value;
+                    IsModified = true;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -207,12 +248,13 @@ namespace GymSystem.App
 
         public void BeginEdit()
         {
-          //  throw new NotImplementedException();
+            IsInEdit = true;
         }
 
         public void CancelEdit()
         {
-           // throw new NotImplementedException();
+            IsInEdit = false;
+            IsModified = false;
         }
         public async Task CancelEditsAsync()
         {

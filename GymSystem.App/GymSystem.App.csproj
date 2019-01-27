@@ -117,6 +117,7 @@
       <DependentUpon>ClientList.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CustomerViewModel.cs" />
+    <Compile Include="Views\DateFormatConverter.cs" />
     <Compile Include="Views\EntranceList.xaml.cs">
       <DependentUpon>EntranceList.xaml</DependentUpon>
     </Compile>

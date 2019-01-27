@@ -89,7 +89,7 @@ namespace GymSystem.App.ViewModels
 
         internal async Task AddLog(EntranceViewModel entrance)
         {
-            throw new NotImplementedException();
+          await  App.Repository.AddEntranceLog(entrance.Model, DateTimeOffset.Now);
         }
     }
 }

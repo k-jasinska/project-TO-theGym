@@ -35,23 +35,26 @@ namespace GymSystem.App
                 ViewModel = new CustomerViewModel
                 {
                     IsNewCustomer = true,
-                    IsInEdit = true
+                    IsInEdit = false,
                 };
             }
             else
             {
                 int id = (int)e.Parameter;
+
+                App.Repository.GetCustomer(id);
+
                 for (int i = 0; i < App.ViewModel.Customers.Count; i++)
                 {
                     if (id == App.ViewModel.Customers[i].Model.Id)
                     {
                         ViewModel = new CustomerViewModel()
                         {
-                            IsNewCustomer = true,
-                            IsInEdit = true,
-                            Model = App.ViewModel.Customers[i].Model
+                            IsNewCustomer = false,
+                            IsInEdit = false,
+                            Model = App.Repository.GetCustomer(id),
                         };
-                        
+
                     }
 
                 }
