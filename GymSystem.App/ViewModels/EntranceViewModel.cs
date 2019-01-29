@@ -95,6 +95,7 @@ namespace GymSystem.App
                         Model.EntranceType = et;
                         EntranceType = et;
                         Price = (float)et.Price;
+                        EndDate = BeginDate.AddDays(et.Duration);
                     }
                 }
             }

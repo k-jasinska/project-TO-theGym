@@ -28,6 +28,17 @@ namespace GymSystem.App
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Disabled;
         }
+        private async void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Name = name.Text;
+            ViewModel.Surname = surname.Text;
+            ViewModel.Email = Email.Text;
+            ViewModel.Phone = Phone.Text;
+            ViewModel.City = Place.Text;
+            ViewModel.Street = Street.Text;
+            ViewModel.Code = Code.Text;
+            await ViewModel.SaveAsync();
+        }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter == null)

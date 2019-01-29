@@ -61,6 +61,7 @@
             Date="{x:Bind ViewModel.EndDate, Mode=OneWay}"
             HorizontalAlignment="Left" 
             Margin="431,415,0,0" 
-            VerticalAlignment="Top"/>
+            VerticalAlignment="Top" 
+            IsEnabled="False"/>
     </Grid>
 </Page>

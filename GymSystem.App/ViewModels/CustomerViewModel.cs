@@ -98,13 +98,12 @@ namespace GymSystem.App
                     {
                         Model.Name = value.ToCharArray()[0].ToString().ToUpper() + value.Substring(1); //Capital letter
                         IsModified = true;
-                    
+                        OnPropertyChanged();
                     }
                     else
                     {
                         ClientList.InvalidDataDialog("Incorrect name", value + " is not a name.");
                     }
-                    OnPropertyChanged();
                 }
             }
         }
@@ -119,13 +118,12 @@ namespace GymSystem.App
                     {
                         Model.Surname = value.ToCharArray()[0].ToString().ToUpper() + value.Substring(1); //Capital letter
                         IsModified = true;
-                    
+                        OnPropertyChanged();
                     }
                     else
                     {
                         ClientList.InvalidDataDialog("Incorrect surname", value + " is not a surname.");
                     }
-                    OnPropertyChanged();
                 }
             }
         }
@@ -137,17 +135,16 @@ namespace GymSystem.App
                 if (value != Model.Phone)
                 {
                     //Phone number can contain only digits or digits preceded by the "+"
-                    if (value.Length > 3 && (value.Substring(1).Any(char.IsDigit) || (value.ToCharArray()[0] == "+".ToCharArray()[0] && value.Substring(0, 1).Any(char.IsDigit))))
+                    if (value.All(char.IsDigit) || (value.ToCharArray()[0] == "+".ToCharArray()[0] && value.Substring(1).All(char.IsDigit)))
                     {
                         Model.Phone = value;
                         IsModified = true;
-                       
+                        OnPropertyChanged();
                     }
                     else
                     {
                         ClientList.InvalidDataDialog("Incorrect phone number.", value + " is not a phone number.");
                     }
-                    OnPropertyChanged();
                 }
             }
         }
@@ -162,13 +159,12 @@ namespace GymSystem.App
                     {
                         Model.Mail = value;
                         IsModified = true;
+                        OnPropertyChanged();
                     }
                     else
                     {
                         ClientList.InvalidDataDialog("Incorrect email address.", value + " is not an email address.");
                     }
-                    OnPropertyChanged();
-
                 }
             }
         }
@@ -187,13 +183,12 @@ namespace GymSystem.App
                     {
                         Model.Adress.City = value.ToCharArray()[0].ToString().ToUpper() + value.Substring(1); //Capital letter
                         IsModified = true;
-                       
+                        OnPropertyChanged();
                     }
                     else
                     {
                         ClientList.InvalidDataDialog("Incorrect city", "City name can not contain any numbers.");
                     }
-                    OnPropertyChanged();
                 }
             }
         }
@@ -209,13 +204,12 @@ namespace GymSystem.App
                     {
                         Model.Adress.Code = value;
                         IsModified = true;
-                      
+                        OnPropertyChanged();
                     }
                     else
                     {
                         ClientList.InvalidDataDialog("Incorrect postal code", value + " is not a postal code.");
                     }
-                    OnPropertyChanged();
                 }
             }
         }
