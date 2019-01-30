@@ -42,7 +42,7 @@ namespace GymSystem.App
             {
                 if (_entrance == null)
                 {
-                    _entrance = new ObservableCollection<Entrance>(Model.Entrance);
+                    _entrance = new ObservableCollection<Entrance>(Model?.Entrance);
                 }
                 return _entrance;
             }
@@ -84,6 +84,7 @@ namespace GymSystem.App
         {
             if (c == null)
                 c = new Person();
+            
             this._model = c;
         }
 

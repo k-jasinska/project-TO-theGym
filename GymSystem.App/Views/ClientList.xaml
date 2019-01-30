@@ -23,16 +23,6 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Margin="12">
             <TextBlock Text="Customer list GymSystem " VerticalAlignment="Center" Margin="5,0" Style="{ThemeResource SubtitleTextBlockStyle}" ></TextBlock>
-            <AppBarButton Icon="Filter" Label="{x:Bind local:Resources.ButtonLabelFilter}">
-                <AppBarButton.Flyout>
-                    <MenuFlyout>
-                        <MenuFlyoutItem  Text="1" />
-                        <MenuFlyoutItem  Text="2" />
-                        <MenuFlyoutItem  Text="3" />
-                        <MenuFlyoutItem  Text="4" />
-                    </MenuFlyout>
-                </AppBarButton.Flyout>
-            </AppBarButton>
 
             <AppBarSeparator />
             <AppBarButton

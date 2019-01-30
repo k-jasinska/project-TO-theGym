@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="GymSystem.App.ViewModels.BindableBase">
-    <Position X="12.5" Y="3" Width="1.5" />
+    <Position X="12" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\BindableBase.cs</FileName>
@@ -9,38 +9,42 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="GymSystem.App.CustomerViewModel">
-    <Position X="12.25" Y="7.75" Width="2" />
+    <Position X="14.75" Y="7.25" Width="2" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAIAAAKqAAAAAJAgAiAAQABIAQAAAAAAoEIBAgBEA=</HashCode>
+      <HashCode>AAAAMAAgKqEAAAAJAggiQAQABIAQAAAAAA4FIBAgBEA=</HashCode>
       <FileName>ViewModels\CustomerViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Model" />
+      <Property Name="SelectedEntrance" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="GymSystem.App.ViewModels.MainViewModel">
-    <Position X="7.75" Y="5.75" Width="1.5" />
+    <Position X="10" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEAAEAAAACAAAiAAAAAAAAAAAAAAAAAAAAAAAgAAAo=</HashCode>
       <FileName>ViewModels\MainViewModel.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SelectedCustomer" />
+    </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="Customers" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="GymSystem.Db.Person">
-    <Position X="16" Y="9" Width="1.5" />
+    <Position X="18" Y="10" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Class Name="GymSystem.App.ViewDetails">
-    <Position X="7.75" Y="9.75" Width="1.5" />
+    <Position X="5.25" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAEAAAAAAAAAAAAAAAAEA=</HashCode>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAQAEAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Views\ViewDetails.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -49,7 +53,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="GymSystem.App.App">
-    <Position X="4" Y="7.5" Width="1.5" />
+    <Position X="9.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAEAAAAAAAQAAAQAAIAAA=</HashCode>
       <FileName>App.xaml.cs</FileName>
@@ -61,24 +65,21 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="GymSystem.App.Models.Admin">
-    <Position X="5" Y="0.75" Width="1.5" />
+    <Position X="17" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAACxQAAAAAAACAgAAIAAgABAAABAIA=</HashCode>
+      <HashCode>AIAAAAAIAAgAAAAAhAAAAAAAACBAAAIAAAAgAUABCYI=</HashCode>
       <FileName>Repository\Admin.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="m" />
-    </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="GymSystem.Db.Model">
-    <Position X="7.25" Y="0.75" Width="1.5" />
+    <Position X="19.25" Y="2.5" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Class Name="GymSystem.App.ClientList">
-    <Position X="4" Y="10.25" Width="1.5" />
+    <Position X="5.25" Y="10" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAQAAAQAAQAAAAAAAgEAAAAAAQABAAAgAAAAA=</HashCode>
+      <HashCode>AAAAAAAAQAAAQAAQAAAAAAAgEAAAAAAQAJAAAgAAAAA=</HashCode>
       <FileName>Views\ClientList.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -86,10 +87,73 @@
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="GymSystem.App.Models.IAdmin">
-    <Position X="3.25" Y="3.5" Width="1.5" />
+  <Class Name="GymSystem.App.ViewModels.EntranceListViewModel">
+    <Position X="13.25" Y="12" Width="1.5" />
+    <InheritanceLine Type="GymSystem.App.ViewModels.BindableBase" FixedToPoint="true">
+      <Path>
+        <Point X="12.75" Y="6.747" />
+        <Point X="12.75" Y="12.415" />
+        <Point X="13.25" Y="12.415" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAACxQAAAAAAACAgAAIAAAABAAABAIA=</HashCode>
+      <HashCode>AAAAIAAgAACAAACAAAAAAAAAAAAAAAAAAAAEQEAAABI=</HashCode>
+      <FileName>ViewModels\EntranceListViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SelectedEntrance" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GymSystem.App.EntranceList">
+    <Position X="5.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAQAAQAAAAEAAAEAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Views\EntranceList.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ViewModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GymSystem.Db.Entrance">
+    <Position X="20" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Person" />
+      <Property Name="EntranceType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GymSystem.App.EntranceViewModel">
+    <Position X="15.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACAAQACwAAAAIBAggCAAAgAKBQAAAAQAgEABAkBCY=</HashCode>
+      <FileName>ViewModels\EntranceViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Model" />
+      <Property Name="EntranceType" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GymSystem.App.AddEntranceToCustomer">
+    <Position X="5.25" Y="17" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAQAECAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\AddEntranceToCustomer.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ViewModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GymSystem.Db.EntranceType">
+    <Position X="22" Y="13.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="GymSystem.App.Models.IAdmin">
+    <Position X="15" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAIAAgAAAAAhAAAAAAAACBAAAIAAAAgAUABCYI=</HashCode>
       <FileName>Repository\IAdmin.cs</FileName>
     </TypeIdentifier>
   </Interface>

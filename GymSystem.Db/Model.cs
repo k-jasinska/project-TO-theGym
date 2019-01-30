@@ -69,6 +69,7 @@ namespace GymSystem.Db
         public Person()
         {
             Adress = new Address();
+            Entrance = new List<Entrance>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
@@ -76,7 +77,7 @@ namespace GymSystem.Db
         public string Phone { get; set; }
         public string Mail { get; set; }
 
-        public virtual List<Entrance> Entrance { get; set; }
+        public virtual ICollection<Entrance> Entrance { get; set; }
         public virtual Address Adress { get; set; }
     }
 }

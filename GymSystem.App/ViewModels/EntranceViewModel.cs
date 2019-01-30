@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using GymSystem.App.Models;
 using GymSystem.App.ViewModels;
 using GymSystem.Db;
+using System.Linq;
+
 namespace GymSystem.App
 {
     public class EntranceViewModel : BindableBase, IEditableObject
@@ -19,6 +21,7 @@ namespace GymSystem.App
                 en.EndDate = new DateTimeOffset(DateTime.Now).AddDays(1);
                 en.EntranceType = new EntranceType();
                 en.EntranceLog = new List<EntranceLog>();
+                
                 IsNewEntrance = true;
             }
             this._model = en;
@@ -30,7 +33,7 @@ namespace GymSystem.App
             Entrance en = new Entrance();
             if(p != null && p.Entrance != null && p.Entrance.Count > 0)
             {
-                en = p.Entrance[0];
+                en = p.Entrance.First();
                 IsNewEntrance = false;
             }
             else if (p != null)

@@ -56,6 +56,8 @@ namespace GymSystem.App
             try
             {
                 var deleteOrder = ViewModel.SelectedCustomer;
+
+              
                 await ViewModel.DeletePerson(deleteOrder);
             }
             catch (Exception ex)
