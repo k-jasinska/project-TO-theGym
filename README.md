@@ -42,6 +42,8 @@ Browsing entrance list
 Edit customer details
 ![sequence diagram](https://raw.githubusercontent.com/k-jasinska/project-TO-theGym/master/docs/edit%20customer.jpg)
 
+## Use cases:
+![use case diagram](https://raw.githubusercontent.com/k-jasinska/project-TO-theGym/master/docs/use%20cases.jpg)
 
 ## Design patterns used in the application:
 
